@@ -3,9 +3,9 @@
 
 Diskussionsfråga 1 - Webbens framtid
 
-.Hur tror du att vi kommer använda webben om fem till tio år? Både till vardags och som samhällsmedborgare?
+1.Hur tror du att vi kommer använda webben om fem till tio år? Både till vardags och som samhällsmedborgare?
 
-.Vilka typer av tjänster tror Du vi skulle kunna tänkas se i en framtida webb?
+2.Vilka typer av tjänster tror Du vi skulle kunna tänkas se i en framtida webb?
 
 Hur tror du din roll som webbutvecklare kommer förändras?
 
