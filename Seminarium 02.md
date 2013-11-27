@@ -76,6 +76,10 @@ kontakt med nätet vart vi än befinner oss.
 
 - Surfa runt på din kommuns webbplats för att orientera dig kring vilken information som finns där. Vilken skulle du vara intresserad av att få presenterad på ett mer strukturerat sätt (för enklare användning i dina applikationer t.ex. som webb-API). Kan du komma på några tjänster som man skulle kunna bygga med denna data som skulle komma kommun/kommuninvånare till gagn? Tror du det finns någon information som i dagsläget inte är tillgänglig som Du skulle vilja komma åt för att bygga bra tjänster/applikationer?
 
+1. jag trycker att Trelleborg webbplatts är riktigt bra. Om inget annat så skulle jag kunna hämta och jämföra elpriser
+   mellan kommuner.
+
+
 - Vad för möjligheter- respektive risker ser du ur kommunens synvinkel att öppna upp sin data?
 
 1. Det är alltid trevligt att kunna få snabb input från folket som är en stor del av samhället.
@@ -87,6 +91,9 @@ kontakt med nätet vart vi än befinner oss.
 3. Projekt blir ofta uppskjutna eller nerlagda vilket kommer att sänka värdet på informationen kommunen skickar ut. 
 
 - Vad för möjligheter- respektive risker ser du som medborgare?
+
+1. Hur vi än gör så är detta ett val från vår sida och de som inte vill eller inte har tillgång av någon anledning
+   blir utfrysta. Vi kan inte lita på att alla läser det.
 
 
 
