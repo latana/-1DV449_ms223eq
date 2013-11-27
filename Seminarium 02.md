@@ -5,11 +5,20 @@
 
 - Hur tror du att vi kommer använda webben om fem till tio år? Både till vardags och som samhällsmedborgare?
 
-1. Min framtidsvision
+1. Min vision av framtiden är att vi kommer använda våra mobiler till det mesta. Vi kommer att utföra våra köp med den
+och kanske till och med använda den som husnyckel, bilnyckel och för att stämpla in på jobbet. Troligen kommer vi ha
+kontakt med nätet vart vi än befinner oss.
 
-- Vilka typer av tjänster tror Du vi skulle kunna tänkas se i en framtida webb?
+2. Företagen jämför redan varje dag med hur mycket de fick sålt samma dag förra året så jag skulle tro att systemet
+   kommer att byggas på så att datorn drar in fler faktorer för att göra en egen bedömmning.
+
+- Vilka typer av tjänster tror du vi skulle kunna tänkas se i en framtida webb?
+
+1. Släktforska och kolla upp vad våra förfäder gjorde för googlesökningar och vad det postade på facebook.
 
 - Hur tror du din roll som webbutvecklare kommer förändras?
+
+1. 
 
 ###1.2 Fallstudie - 100% webb
 
