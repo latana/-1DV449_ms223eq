@@ -54,15 +54,37 @@ kontakt med nätet vart vi än befinner oss.
 
 - Vad innebär egentligen begreppet "öppen data"?
 
+1. Att myndigheter lägger upp data som tidigare inte varit för allmänheten så att utomstående kan ta del ut
+   av det och på så sätt bli mer insatt och ta del ut av det.
+
 - Vad finns det för krav på den data som kallas för öppen data?
 
+1. Data som innehåller personuppgifter eller lyder under sekretess skall vara så omfattande som möjligt.
+2. Bilder och video skall vara i så bra kvalite som möjligt.
+3. Informationen skall läggas upp snarast då värdet kan sjunka med tiden.
+4. Det skall vara tillgängligt.
+5. En bra design för att göra det lätt för andra att jämföra med andra register.
+6. Det skall vara gratis.
+7. I kort och gott så skall OpenData vara öpptillgängligt och för alla utan kostnad. 
+
 - Vad tror du tendenserna med mer öppen data kommer spela för roll för dig som webbutvecklare?
+
+1. Det blir ännu mer att göra på webben och mer att underhålla. Det kan hända att mer press på oss som
+   utvecklare inom säkerhet och kampen om att förbli anonym.
 
 ###2.1 Fallstudie
 
 - Surfa runt på din kommuns webbplats för att orientera dig kring vilken information som finns där. Vilken skulle du vara intresserad av att få presenterad på ett mer strukturerat sätt (för enklare användning i dina applikationer t.ex. som webb-API). Kan du komma på några tjänster som man skulle kunna bygga med denna data som skulle komma kommun/kommuninvånare till gagn? Tror du det finns någon information som i dagsläget inte är tillgänglig som Du skulle vilja komma åt för att bygga bra tjänster/applikationer?
 
 - Vad för möjligheter- respektive risker ser du ur kommunens synvinkel att öppna upp sin data?
+
+1. Det är alltid trevligt att kunna få snabb input från folket som är en stor del av samhället.
+
+2. Risken är att den låga nivån på nätet kommer att smitta av sig och den feedback som kommunen får
+   blir bara från en liten del av samhället som hörs och syns väldigt mycket. Vad kommunen än skickar ut
+   kommer de troligen bli bemött med negativ kritik.   
+
+3. Projekt blir ofta uppskjutna eller nerlagda vilket kommer att sänka värdet på informationen kommunen skickar ut. 
 
 - Vad för möjligheter- respektive risker ser du som medborgare?
 
