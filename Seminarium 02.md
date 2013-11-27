@@ -18,7 +18,12 @@ kontakt med nätet vart vi än befinner oss.
 
 - Hur tror du din roll som webbutvecklare kommer förändras?
 
-1. 
+1. Nu i början så är det stor efterfråga på programmerare och det tror jag kommer dala av med tiden.
+   Efter att det mesta av alla företagen blivit flyttad till nätet så tror jag att programmerare kommer bli
+   2000-talets nästa industriarbetare.
+
+2. Onekligen kommer det att bli allt större funktioner med mindre text. När man blir gammal och grå och visar
+   barnbarnen hur man programmerade på sin tid så kommer de att skratta över hur långsamt det går, hur mycket man          skriver och fråga hur vi kunde få någonting gjort.
 
 ###1.2 Fallstudie - 100% webb
 
