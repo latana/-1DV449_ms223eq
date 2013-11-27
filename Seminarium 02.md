@@ -76,7 +76,7 @@ kontakt med nätet vart vi än befinner oss.
 
 - Surfa runt på din kommuns webbplats för att orientera dig kring vilken information som finns där. Vilken skulle du vara intresserad av att få presenterad på ett mer strukturerat sätt (för enklare användning i dina applikationer t.ex. som webb-API). Kan du komma på några tjänster som man skulle kunna bygga med denna data som skulle komma kommun/kommuninvånare till gagn? Tror du det finns någon information som i dagsläget inte är tillgänglig som Du skulle vilja komma åt för att bygga bra tjänster/applikationer?
 
-1. jag trycker att Trelleborg webbplatts är riktigt bra. Om inget annat så skulle jag kunna hämta och jämföra elpriser
+1. Jag trycker att Trelleborg webbplatts är riktigt bra. Om inget annat så skulle jag kunna hämta och jämföra elpriser
    mellan kommuner.
 
 
