@@ -1,7 +1,7 @@
 -1DV449_ms223eq
 ===============
 
-Diskussionsfråga 1 - Webbens framtid
+###Diskussionsfråga 1 - Webbens framtid
 
 - Hur tror du att vi kommer använda webben om fem till tio år? Både till vardags och som samhällsmedborgare?
 
@@ -9,7 +9,7 @@ Diskussionsfråga 1 - Webbens framtid
 
 - Hur tror du din roll som webbutvecklare kommer förändras?
 
-1.2 Fallstudie - 100% webb
+###1.2 Fallstudie - 100% webb
 
 - 2010 publicerade Google ett blogginlägg som man döpte till "Nothing but the web".
   Där pratar man om 100% webb som ett koncept där webben är den rådande mjukplattformen och där data 
