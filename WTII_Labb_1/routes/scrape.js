@@ -17,29 +17,53 @@ router.get('/', function(req, res) {
     var day = getTime.getDate();
     var hour = getTime.getHours();
     var min = getTime.getMinutes();
+    var milli = getTime.getTime();
+
 
     if(day < 10){
         day = '0' + day;
     }
     var date = year +"-"+ month + "-" + day + " " + hour + ":" + min;
+    var linkCount = 0;
 
     var Json = {};
     Json.ScrapeDate = date;
 
+
     var url = 'http://coursepress.lnu.se/kurser/?bpage=1';
-    pageScrape(url, Json);
 
-    setTimeout(function(){
+    // här
 
-        fs.writeFile('done.json', JSON.stringify(Json, null, 4), function(err){
+    fs.readFile('CoursePress.json', function (err, data) {
 
-            console.log('done');
-        });
+        var writeToBrowser = function (data){
+            res.write(data);
+        };
 
-    }, 30000);
+        if (!data) {
+
+            pageScrape(url, Json, linkCount, writeToBrowser);
+            return;
+        }
+
+        var date = new Date().getTime();
+        var content = JSON.parse(data);
+        if (date - content.TimeStamp > 300000) {
+
+            console.log('omskrap');
+            pageScrape(url,Json, linkCount, writeToBrowser);
+        }
+        else {
+
+            console.log('skrapar inte');
+        }
+    });
+
+    // och här
+
 });
 
-function pageScrape(url, Json){
+function pageScrape(url, Json, linkCount, callback){
 
     var pageUrl = 'http://coursepress.lnu.se';
     request(url, function (error, response, html) {
@@ -55,22 +79,28 @@ function pageScrape(url, Json){
                 var name = data.html();
                 var links = data.attr('href');
 
-                if(links == undefined){
-                    links = 'No information';
+                if(links.match('/kurs')) {
+                    linkCount ++;
+                    scrapeFromLink(links, Json, linkCount, callback);
                 }
 
-                scrapeFromLink(links, Json);
+                function scrapeFromLink(links, Json, linkCount, callback) {
 
-                function scrapeFromLink(links, Json) {
+                    var myRequest = {
+                        url: links,
+                            headers:{
+                            "User-Agent": 'Måns Schütz'
+                        }
+                    };
 
-                    request(links, function (error, response, html) {
+                    request(myRequest, function (error, response, html) {
 
                         if(!error) {
                             var $;
                             $ = cheerio.load(html);
                             var courseTitle = $('#header-wrapper h1 a').text();
 
-                            if(courseTitle === undefined){
+                            if(courseTitle === ''){
                                 courseTitle = 'No Information';
                             }
 
@@ -83,10 +113,6 @@ function pageScrape(url, Json){
                             Json[courseTitle] = {};
 
                             Json[courseTitle].title = courseTitle;
-
-                            if(links !== "http://coursepress.lnu.se/") {
-                                Json[courseTitle].link = links;
-                            }
 
                             Json[courseTitle].code = courseCode;
 
@@ -158,7 +184,28 @@ function pageScrape(url, Json){
             if (newUrl !== undefined) {
 
                 pageUrl = pageUrl + newUrl;
-                pageScrape(pageUrl, Json);
+
+                pageScrape(pageUrl, Json, linkCount, callback);
+            }
+            else {
+
+                var interval = setInterval(SaveToFile, 3000);
+                    function SaveToFile () {
+
+                        if (linkCount !== Object.keys(Json).length) {
+                            return;
+                        }
+                        Json.NumberOfCourses = Object.keys(Json).length;
+                        var milli = new Date().getTime();
+                        Json.TimeStamp = milli;
+
+                        fs.writeFile('CoursePress.json', JSON.stringify(Json, null, 4), function (err) {
+
+                            callback(JSON.stringify(Json,null,4));
+                            console.log('Saved to file');
+                        });
+                        clearInterval(interval);
+                    }
             }
         }
     });
@@ -172,20 +219,12 @@ function checkIfValidString(string){
     return string;
 }
 
-function setLastScrape(){
+function checkIfUndifined(data){
 
-    var date = new Date();
-
-    fs.writeFile('time.txt', JSON.stringify(Json, null, 4), function(err){
-
-        console.log('done');
-    });
-
-}
-
-function checkLastScrape(){
-
-
+    if(data === undefined){
+        return data = 'No information';
+    }
+    return data;
 }
 
 module.exports = router;
