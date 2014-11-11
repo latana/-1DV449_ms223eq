@@ -24,3 +24,23 @@
     
     
 ### Svar
+
+    1. 
+    
+    2. 
+    
+    3.
+    
+    4. Man bör väl kolla så att det inte är någon privat eller känslig information man skrapar.
+       Man borde inte skrapa sidor utan att ha deras tillstånd. Ta hänsyn till robot.txt.
+       
+    5. Det finns alltid en risk att sidan ändrar sin html struktur.
+    
+    6. Varje gång man anropar så kräver ASP.NET-applikationen att man skickar med extra information för att behålla 
+       "state".
+    
+    7. Callback scopet.
+    
+    8.
+    
+    9. Absolut!
