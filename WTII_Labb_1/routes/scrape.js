@@ -29,10 +29,7 @@ router.get('/', function(req, res) {
     var Json = {};
     Json.ScrapeDate = date;
 
-
     var url = 'http://coursepress.lnu.se/kurser/?bpage=1';
-
-    // här
 
     fs.readFile('CoursePress.json', function (err, data) {
 
@@ -50,22 +47,16 @@ router.get('/', function(req, res) {
         var content = JSON.parse(data);
         if (date - content.TimeStamp > 300000) {
 
-            console.log('omskrap');
             pageScrape(url,Json, linkCount, writeToBrowser);
         }
-        else {
-
-            console.log('skrapar inte');
-        }
     });
-
-    // och här
 
 });
 
 function pageScrape(url, Json, linkCount, callback){
 
     var pageUrl = 'http://coursepress.lnu.se';
+
     request(url, function (error, response, html) {
 
         if (!error) {
@@ -100,21 +91,13 @@ function pageScrape(url, Json, linkCount, callback){
                             $ = cheerio.load(html);
                             var courseTitle = $('#header-wrapper h1 a').text();
 
-                            if(courseTitle === ''){
-                                courseTitle = 'No Information';
-                            }
-
                             var courseCode = $('#header-wrapper ul li').last().text();
 
-                            if(courseCode == ''){
-                                courseCode = 'No information';
-                            }
+                            Json[checkIfValidString(courseTitle)] = {};
 
-                            Json[courseTitle] = {};
+                            Json[courseTitle].title = checkIfValidString(courseTitle);
 
-                            Json[courseTitle].title = courseTitle;
-
-                            Json[courseTitle].code = courseCode;
+                            Json[courseTitle].code = checkIfValidString(courseCode);
 
                             var coursePlanLink = $('#navigation .sub-menu li a').filter(function(){
 
@@ -122,58 +105,34 @@ function pageScrape(url, Json, linkCount, callback){
                                 if(data.text().match("Kursplan")){
                                     var coursePlan = data.attr('href');
 
-                                    if(coursePlan === undefined){
-                                        coursePlan = 'No information';
-                                    }
-
-                                    Json[courseTitle].coursePlanLink = coursePlan;
+                                    Json[courseTitle].coursePlanLink = checkIfUndifined(coursePlan);
                                 }
                             });
 
                             var courseInfo = $('.entry-content p').text();
 
-                            if(courseInfo == ''){
-                                courseInfo = 'No Information';
-                            }
-                            Json[courseTitle].courseInfo = courseInfo;
+                            Json[courseTitle].courseInfo = checkIfValidString(courseInfo);
 
-                            var latestNews = $('#latest-post').parent().next().text();
-
-                            if(latestNews === ''){
-                                latestNews = 'No Information'
-                            }
                             var latestTitle = $('.entry-header .entry-title').first().text();
 
-                            if(latestTitle == ''){
-                                lastTitle = 'No Information';
-                            }
-
                             var publicher = $('.entry-header .entry-byline strong').first().text();
-
-                            if(publicher == ''){
-                                publicher = 'No Information';
-                            }
 
                             var publichedDate = $('.entry-header .entry-byline').first().text();
 
                             if(publichedDate == ''){
-                                publichedDate = 'No Information';
-                            }
-
-                            var dateResult = publichedDate.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})/);
-
-                            if(dateResult === null){
-
-                                dateResult = 'No Information';
+                                var dateResult = ['No Information'];
                             }
                             else{
-                                Json[courseTitle].LatestNews = {
-
-                                    NewsTitle: latestTitle,
-                                    Publisher: publicher,
-                                    Date: dateResult[0]
-                                }
+                                var dateResult = publichedDate.match(/(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})/);
                             }
+
+                            Json[courseTitle].LatestNews = {
+
+                                NewsTitle: checkIfValidString(latestTitle),
+                                Publisher: checkIfValidString(publicher),
+                                Date: dateResult[0]
+                            }
+
                         }
                     });
                 }
