@@ -36,8 +36,8 @@
        
     5. Det finns alltid en risk att sidan ändrar sin html struktur.
     
-    6. Varje gång man anropar så kräver ASP.NET-applikationen att man skickar med extra information för att behålla 
-       "state".
+    6. Varje gång man anropar så kräver ASP.NET-applikationen att man skickar med extra information för
+        att behålla "state".
     
     7. Callback scopet.
     
