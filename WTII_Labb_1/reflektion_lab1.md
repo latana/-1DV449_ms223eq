@@ -46,8 +46,8 @@
     7. Callback scopet och Interval. Hur man vet att skrapningen är klar.
     
     8. Pete Warden hade endast läst robot.txt och skrapade facebook på information för att hålla koll på folk
-        från olika sociala nätverk. Detta växte och höll på tills facebook kontaktade honom och hotade med stämning.
-        Som tur för honom klarade han sig undan. Är det kanske honom ni nämnt i föreläsningarna?
+        från olika sociala nätverk. Detta växte och höll på tills facebook kontaktade honom och hotade med
+        stämning. Som tur för honom klarade han sig undan. Är det kanske honom ni nämnt i föreläsningarna?
         Här är hans blog - 
         http://petewarden.com/2010/04/05/how-i-got-sued-by-facebook/
     
