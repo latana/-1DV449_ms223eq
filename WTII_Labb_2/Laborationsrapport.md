@@ -2,7 +2,7 @@
 
 ## Steg 1. Säkerhetsbrister
 
-## Hittade fel
+## Brister
 
 #### Inloggning
 
