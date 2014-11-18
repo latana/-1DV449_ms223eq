@@ -2,8 +2,8 @@
 require_once("sec.php");
 
 // check tha POST parameters
-$u = $_POST['username'];
-$p = $_POST['password'];
+$u = trim(strip_tags($_POST['username']));
+$p = trim(strip_tags($_POST['password']));
 
 // Check if user is OK
 if(isset($u) && isset($p) && isUser($u, $p)) {
@@ -11,8 +11,7 @@ if(isset($u) && isset($p) && isUser($u, $p)) {
 	sec_session_start();
 	$_SESSION['username'] = $u;
 	$_SESSION['login_string'] = hash('sha512', "123456" +$u);
-	
-	header("Location: mess.php"); 
+	header("Location: mess.php");
 }
 else {
 	// To bad

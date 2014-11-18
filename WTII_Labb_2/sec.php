@@ -46,16 +46,20 @@ function isUser($u, $p) {
 	catch(PDOEception $e) {
 		die("Del -> " .$e->getMessage());
 	}
-	$q = "SELECT id FROM users WHERE username = '$u' AND password = '$p'";
+	$q = "SELECT id FROM users WHERE username = ? AND password = ?";
+	$params = array($u, $p);
 
 	$result;
 	$stm;
 	try {
 		$stm = $db->prepare($q);
-		$stm->execute();
+		$stm->execute($params);
 		$result = $stm->fetchAll();
 		if(!$result) {
-			return "Could not find the user";
+			return false;
+		}
+		else{
+			return true;
 		}
 	}
 	catch(PDOException $e) {
@@ -98,7 +102,11 @@ function logout() {
 	if(!session_id()) {
 		sec_session_start();
 	}
+	unset($_SESSION['username']);
+	unset($_SESSION['login_string']);
 	session_end();
+	
+	var_dump($_SESSION['username']);
 	header('Location: index.php');
 }
 

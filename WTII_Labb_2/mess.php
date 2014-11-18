@@ -1,7 +1,13 @@
 <?php
 	require_once("get.php");
-
+	require_once 'sec.php';
+	sec_session_start();
+	
+	if(!isset($_SESSION['username'])){
+		header("Location: index.php"); 
+	}
 ?>
+
 <!DOCTYPE html>
 <html lang="sv">
   <head>
