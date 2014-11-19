@@ -84,3 +84,6 @@ i så fall return false;
 1. En bild länkas in till body i mess.php html. Denna syns inte och därför beslutar jag att ta bort den.
 
 2. I debug.php hittade jag kod som påverkade prestandan och som dessutom inte tillförde någon nytta.
+   Jag tog beslutet att ta bort koden.
+
+3. Css'en som fanns i mess.php och index.php har nu flyttats till vars sin css fil.
