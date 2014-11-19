@@ -16,6 +16,8 @@
 
 5. Värdena går direkt in i sql frågan. Systemet är motagligt för sql-injection.
 
+6. Lösenorden sparas i databasen i klartext.
+
 
 #### Skriva meddelande
 
@@ -40,6 +42,8 @@
 
 5. Jag har gjort så att värdena finns som parametrar i en array som används under execute.
 
+6. Lösningen blev att använda mig ut av "password_hash(lösenordet, PASSWORD_BCRYPT));".
+
 #### Skriva meddelande
 
 6. Använder mig ut av strip_tags på värdena i $_Get förfrågorna.
@@ -62,6 +66,9 @@ i så fall return false;
 4. En ond användare skulle kunna stjäla en session från en annan användare och logga in på det sättet.
 
 5. En ond användare skulle kunna komma förbi login frågan eller ta bort data från databasen.
+ 
+6. Om det skulle bli en databas läcka så skulle förövaren kunna se alla lösenord. Nu är de lite mer skyddade.
+  Dessutom så är den skyddad mot mig själv.
 
 #### Skriva meddelande
 
