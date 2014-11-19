@@ -77,3 +77,10 @@ i så fall return false;
 7. Så att tråkiga användare inte ska kunna lägga upp tomma poster.
 
 8. En ond användare skulle kunna påverka all data i databasen.
+
+
+## Steg 2. Optimering
+
+1. En bild länkas in till body i mess.php html. Denna syns inte och därför beslutar jag att ta bort den.
+
+2. I debug.php hittade jag kod som påverkade prestandan och som dessutom inte tillförde någon nytta.
