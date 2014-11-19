@@ -57,7 +57,7 @@ i så fall return false;
 
 #### inlogning
 
-1. En ond användare skulle kunna skriva in javascript och window.onload().
+1. En ond användare skulle kunna skriva in javascript och window.location(www.opassande_webbplatts.com).
 
 2. Annars vet vi inte vem användaren är.
 
