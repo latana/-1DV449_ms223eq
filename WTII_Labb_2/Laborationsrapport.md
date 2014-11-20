@@ -87,3 +87,7 @@ i så fall return false;
    Jag tog beslutet att ta bort koden.
 
 3. Css'en som fanns i mess.php och index.php har nu flyttats till vars sin css fil.
+
+4. Både index.php och mess.php kallade på samma filer flera gånger. Nu kallar de på samma fil endast en gång.
+
+5. 
