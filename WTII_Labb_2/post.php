@@ -5,6 +5,7 @@
 */
 function addToDB($message, $user) {
 	$db = null;
+	$time = time();
 	
 	if(empty($message) || empty($user)){
 		return false;
@@ -18,8 +19,9 @@ function addToDB($message, $user) {
 		die("Something went wrong -> " .$e->getMessage());
 	}
 	
-	$q = "INSERT INTO messages (message, name) VALUES(?, ?)";
-	$params = array($message, $user);
+	$q = "INSERT INTO messages (message, name, timestamp) VALUES(?, ?, ?)";
+	
+	$params = array($message, $user, $time);
 	
 	try {
 		$stm = $db->prepare($q);

@@ -28,16 +28,46 @@ var MessageBoard = {
                                                 }
     
     },
-    getMessages:function() {
-        console.log("INNE");
+    
+     getMessages:function(){
+    
+    (function poll(){
+    	
+    	setTimeout(function(){
+
+  	$.ajax({
+  		type:'GET',
+  		url:'functions.php',
+  		data: {function: "getMessages", arrayLength: MessageBoard.messages.length},
+  		success: function(data){
+  			
+  			data = JSON.parse(data);
+				
+				for(var mess in data) {
+					var obj = data[mess];
+				    var text = obj.name +" said:\n" +obj.message;
+					var mess = new Message(text, new Date());
+	                var messageID = MessageBoard.messages.push(mess)-1;
+	    
+	                MessageBoard.renderMessage(messageID);
+				}
+				document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
+  		},
+  		complete: poll
+  	});
+  }, 1000);
+    })();	
+},
+    
+   getFirstMessages:function() {
+
         $.ajax({
 			type: "GET",
 			url: "functions.php",
-			data: {function: "getMessages"}
+			data: {function: "getFirstMessages"}
 		}).done(function(data) { // called when the AJAX call is ready
 						
 			data = JSON.parse(data);
-		
 			
 			for(var mess in data) {
 				var obj = data[mess];
@@ -51,7 +81,6 @@ var MessageBoard = {
 			document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
 			
 		});
-	
 
     },
     sendMessage:function(){
@@ -64,7 +93,8 @@ var MessageBoard = {
 		  	url: "functions.php",
 		  	data: {function: "add", name: MessageBoard.nameField.value, message:MessageBoard.textField.value}
 		}).done(function(data) {
-		  alert("Your message is saved! Reload the page for watching it");
+			
+		  //alert("Your message is saved! Reload the page for watching it");
 		});
     
     },
@@ -113,9 +143,9 @@ var MessageBoard = {
         var spanClear = document.createElement("span");
         spanClear.className = "clear";
 
-        div.appendChild(spanClear);        
+        div.appendChild(spanClear);        // messageboard.messageaeria.firstchild
         
-        MessageBoard.messageArea.appendChild(div);       
+        MessageBoard.messageArea.insertBefore(div, MessageBoard.messageArea.firstChild);   
     },
     removeMessage: function(messageID){
 		if(window.confirm("Vill du verkligen radera meddelandet?")){
@@ -134,7 +164,7 @@ var MessageBoard = {
          alert(showTime);
     },
     logout: function() {
-        window.location = "index.php";
+       window.location = "sessionkiller.php";
     }
 }
 

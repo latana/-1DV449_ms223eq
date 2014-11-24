@@ -46,8 +46,11 @@ function isUser($u, $p) {
 	catch(PDOEception $e) {
 		die("Del -> " .$e->getMessage());
 	}
-	$q = "SELECT id FROM users WHERE username = ? AND password = ?";
-	$params = array($u, $p);
+	
+	password_hash($p, PASSWORD_BCRYPT);
+
+	$q = "SELECT * FROM users WHERE username = ?";
+	$params = array($u);
 
 	$result;
 	$stm;
@@ -55,19 +58,18 @@ function isUser($u, $p) {
 		$stm = $db->prepare($q);
 		$stm->execute($params);
 		$result = $stm->fetchAll();
-		if(!$result) {
-			return false;
+
+		if(password_verify($p, $result[0][2])) {
+			return true;
 		}
 		else{
-			return true;
+			return false;
 		}
 	}
 	catch(PDOException $e) {
 		echo("Error creating query: " .$e->getMessage());
 		return false;
 	}
-	return $result;
-	
 }
 
 function getUser($user) {
@@ -80,13 +82,15 @@ function getUser($user) {
 	catch(PDOEception $e) {
 		die("Del -> " .$e->getMessage());
 	}
-	$q = "SELECT * FROM users WHERE username = '$user'";
+	$q = "SELECT * FROM users WHERE username = ?";
+	$params = array($user);
+
 
 	$result;
 	$stm;
 	try {
 		$stm = $db->prepare($q);
-		$stm->execute();
+		$stm->execute($params);
 		$result = $stm->fetchAll();
 	}
 	catch(PDOException $e) {
@@ -106,7 +110,5 @@ function logout() {
 	unset($_SESSION['login_string']);
 	session_end();
 	
-	var_dump($_SESSION['username']);
 	header('Location: index.php');
 }
-
