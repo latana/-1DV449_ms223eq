@@ -91,3 +91,16 @@ i så fall return false;
 4. Både index.php och mess.php kallade på samma filer flera gånger. Nu kallar de på samma fil endast en gång.
 
 5. 
+
+## Steg 3. Longpolling
+
+Min longpolling börjar i messageBoard.js där getMessages anropar getMessages i get.php varje second. Efter varje
+förfrågan så börjar servern kontrollera om det finns ny data att hitta i 20 seconder. Under den tiden så kontrollerar
+systemet antalet inlägg från klienten mot databasen. Om databasens längd är större så skickar den ut de nya inlägged,
+bryter loopen och presenterar det nya inlägget. Problemet med detta är att när systemet är i lopen så är den fast. Användaren trycker på knappen och sedan måste användaren vänta tills lopen är klar.
+
+### Optimering i Longpolling
+
+Den första variationen av longpolling gjorde en anslutning mot databasen. Denna biten kan jag inte komma ifrån
+men när systemet var medveten om att ny data ska presenteras så gjorde jag en ytterligare anslutning för att hämta
+ut det senaste inlägget. Nu så använder jag mig ut av samma fråga.
