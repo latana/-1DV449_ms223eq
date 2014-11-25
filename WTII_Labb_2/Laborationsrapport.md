@@ -110,6 +110,8 @@ förfrågan så börjar servern kontrollera om det finns ny data att hitta i 20 
 systemet antalet inlägg från klienten mot databasen. Om databasens längd är större så skickar den ut de nya inlägged,
 bryter loopen och presenterar det nya inlägget. Problemet med detta är att när systemet är i lopen så är den fast. Användaren trycker på knappen och sedan måste användaren vänta tills lopen är klar.
 
+. Det är såklart kostsamt att skicka så många förfrågningar så ofta.
+
 ### Optimering i Longpolling
 
 Den första variationen av longpolling gjorde en anslutning mot databasen. Denna biten kan jag inte komma ifrån
