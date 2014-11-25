@@ -27,6 +27,8 @@
 
 8. Inserten till databasen är inte skyddad mot sql injection.
 
+9. Man kan posta inlägg via url'en.
+
 
 ### Lösningar
 
@@ -43,6 +45,8 @@
 5. Jag har gjort så att värdena finns som parametrar i en array som används under execute.
 
 6. Lösningen blev att använda mig ut av "password_hash(lösenordet, PASSWORD_BCRYPT));".
+
+7. Lade till en token så som endast kommer ut när man trycker på knappen.
 
 #### Skriva meddelande
 
@@ -78,6 +82,8 @@ i så fall return false;
 
 8. En ond användare skulle kunna påverka all data i databasen.
 
+9. Ett elakt system eller personer skulle kunna komma in och spama inlägg eller tillföra oönskade handlingar. 
+
 
 ## Steg 2. Optimering
 
@@ -90,7 +96,12 @@ i så fall return false;
 
 4. Både index.php och mess.php kallade på samma filer flera gånger. Nu kallar de på samma fil endast en gång.
 
-5. 
+5. filen "jquery-1.10.2.min.js" och jquery.js uppfattade jag som att de gjorde samma sak.
+   Jag tog det tunga beslutet att ta bort den.
+
+6. Jag minifierade css filen bootstrap detta 100.
+
+7. Tog bort bootstrap.js och jquery.js.
 
 ## Steg 3. Longpolling
 
