@@ -6,6 +6,7 @@
 	if(!isset($_SESSION['login_string'])){
 		header("Location: index.php"); 
 	}
+	$_SESSION['token'] = uniqid();
 ?>
 
 <!DOCTYPE html>
@@ -21,9 +22,9 @@
     <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
     <link rel="shortcut icon" href="pic/favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel='stylesheet' type='text/css' href='css/style.css' />
-	<script type="text/javascript" src="js/jquery.js"></script>
+	
 	
 	
 	<title>Messy Labbage</title>
@@ -41,21 +42,15 @@
                 Message: <br />
                 <textarea name="mess" id="inputText" cols="55" rows="6"></textarea>
                 <input class="btn btn-primary" type="button" id="buttonSend" value="Write your message" />
+                <input name "token" type="hidden" id='token' value="<?php echo $_SESSION['token'] ?>" />
                 <span class="clear">&nbsp;</span>
 
             </div>
 
         </div>
         
-        <!-- This script is running to get the messages -->
-			<script>
-				$(document).ready(function() {
-					MessageBoard.getFirstMessages();
-					MessageBoard.getMessages();
-				});
-			</script>		
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>		
 	<script src="MessageBoard.js"></script>
-	<script src="js/script.js"></script>
 	<script src="Message.js"></script>
     
 	</body>

@@ -6,6 +6,11 @@ var MessageBoard = {
 
     init:function(e)
     {
+    	
+    	 
+					MessageBoard.getAllMessages();
+					MessageBoard.getMessages();
+				
 	
 		    MessageBoard.textField = document.getElementById("inputText");
 		    MessageBoard.nameField = document.getElementById("inputName");
@@ -59,12 +64,12 @@ var MessageBoard = {
     })();	
 },
     
-   getFirstMessages:function() {
+   getAllMessages:function() {
 
         $.ajax({
 			type: "GET",
 			url: "functions.php",
-			data: {function: "getFirstMessages"}
+			data: {function: "getAllMessages"}
 		}).done(function(data) { // called when the AJAX call is ready
 						
 			data = JSON.parse(data);
@@ -91,24 +96,13 @@ var MessageBoard = {
         $.ajax({
 			type: "GET",
 		  	url: "functions.php",
-		  	data: {function: "add", name: MessageBoard.nameField.value, message:MessageBoard.textField.value}
+		  	data: {function: "add", name: MessageBoard.nameField.value, message:MessageBoard.textField.value, token:$("#token").val() }
 		}).done(function(data) {
 			
-		  //alert("Your message is saved! Reload the page for watching it");
 		});
     
     },
-    renderMessages: function(){
-        // Remove all messages
-        MessageBoard.messageArea.innerHTML = "";
-     
-        // Renders all messages.
-        for(var i=0; i < MessageBoard.messages.length; ++i){
-            MessageBoard.renderMessage(i);
-        }        
-        
-        document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
-    },
+    
     renderMessage: function(messageID){
         // Message div
         var div = document.createElement("div");
@@ -147,14 +141,7 @@ var MessageBoard = {
         
         MessageBoard.messageArea.insertBefore(div, MessageBoard.messageArea.firstChild);   
     },
-    removeMessage: function(messageID){
-		if(window.confirm("Vill du verkligen radera meddelandet?")){
-        
-			MessageBoard.messages.splice(messageID,1); // Removes the message from the array.
-        
-			MessageBoard.renderMessages();
-        }
-    },
+    
     showTime: function(messageID){
          
          var time = MessageBoard.messages[messageID].getDate();

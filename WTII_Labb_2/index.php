@@ -24,9 +24,7 @@
       </form>
     </div> <!-- /container -->
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href='css/index.css' rel='stylesheet'>
   </body>
 </html>
-
-<script src="js/bootstrap.js"></script>

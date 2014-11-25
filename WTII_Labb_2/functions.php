@@ -2,8 +2,6 @@
 require_once("get.php");
 require_once("post.php");
 require_once("sec.php");
-sec_session_start();
-
 /*
 * It's here all the ajax calls goes
 */
@@ -12,19 +10,29 @@ if(isset($_GET['function'])) {
 	if($_GET['function'] == 'logout') {
 		//logout();
     } 
-    else if($_GET['function'] == 'add') {
+	elseif($_GET['function'] == 'add') {
 	    $name = trim(strip_tags($_GET["name"]));
 		$message = trim(strip_tags($_GET["message"]));
-		
-		addToDB($message, $name);
+
+		sec_session_start();
+
+		$token = $_GET['token'];
+
+			if($_SESSION['token'] == $token){
+				addToDB($message, $name);
+			}
+			else{
+				//header("Location: mess.php");
+			}
+		session_write_close();
     }
 	
-    elseif($_GET['function'] == 'getMessages') {
+	elseif($_GET['function'] == 'getMessages') {
     	 $arrayLength = $_GET['arrayLength'];
   	   	echo(json_encode(getMessages($arrayLength)));	
     }
 	
-	elseif($_GET['function'] == 'getFirstMessages'){
-		echo(json_encode(getFirstMessages()));	
+	elseif($_GET['function'] == 'getAllMessages'){
+		echo(json_encode(getAllMessages()));	
 	}
 }

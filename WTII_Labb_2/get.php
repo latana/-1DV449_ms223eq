@@ -1,8 +1,8 @@
 <?php
 
-// get the specific message
+// get the specific messages
 function getMessages($arrayLength) {
-	$endtime = time() + 5;
+	$endtime = time() + 20;
 	$db = null;
 
 	while (time() <= $endtime) {
@@ -14,33 +14,22 @@ function getMessages($arrayLength) {
 			die("Del -> " . $e -> getMessage());
 		}
 
-		$q = "SELECT * FROM messages";
+		$q = "SELECT * FROM messages ORDER BY timestamp DESC";
 		$stm = $db -> prepare($q);
 		$stm -> execute();
 		$result = $stm -> fetchAll();
 
 		if ($arrayLength < count($result)) {
 
-			$q = "SELECT * FROM messages ORDER BY timestamp DESC LIMIT 1";
-
-			try {
-				$stm = $db -> prepare($q);
-				$stm -> execute();
-				$result = $stm -> fetchAll();
-			} catch(PDOException $e) {
+			$length = count($result) - $arrayLength;
+			$mess = array_splice($result, 0, $length,$preserve_keys = false);
 				
-				echo("Error creating query: " . $e -> getMessage());
-				return false;
-			}
-			if ($result) {
-				
-				return $result;
-			}
+			return $mess;
 		}
 	}
 }
 
-function getFirstMessages() {
+function getAllMessages() {
 
 	$db = null;
 
