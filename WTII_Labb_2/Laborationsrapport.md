@@ -29,24 +29,30 @@
 
 9. Man kan posta inlägg via url'en.
 
+#### Övrigt
+
+1. Man kan ladda ner filen om man skriver in sökvägen till db.db
 
 ### Lösningar
 
 #### Inloggning
 
-1. Använder mig ut av strip_tags() functionen i check.php.
+1. Använder mig ut av strip_tags() functionen i check.php för att ta bort taggar i username och password.
 
-2. filen sec.php har en medtod som heter isUser. IsUser var satt i en if satts i check.php och behövde retunera en bool.
+2. filen sec.php anropar en medtod som heter isUser. IsUser var satt i en if satts i check.php och behövde retunera en bool
+3. men retunerade i ett senario en sträng. Nu retunerar den bara en bool.
 
 3. Implementerade en if - satts som kontrollerar sessionen. Om den inte är satt så skickas man tillbaka till index.php
 
 4. Man kan fortfarande inte göra en sessions stöld.
 
-5. Jag har gjort så att värdena finns som parametrar i en array som används under execute.
+5. I sqlfrågan har jag gjort så att värdena finns som parametrar i en array som används under execute.
+   Inloggningen är inte längre mottaglig för sql-injection.
 
 6. Lösningen blev att använda mig ut av "password_hash(lösenordet, PASSWORD_BCRYPT));".
-
-7. Lade till en token så som endast kommer ut när man trycker på knappen.
+   Och skicka in det i databasen. Nu sparas inte lösenorden i klartext.
+   
+7. Lade till en token så som endast kommer ut när man trycker på knappen. För att förhindra chrossscripting.
 
 #### Skriva meddelande
 
@@ -110,7 +116,7 @@ förfrågan så börjar servern kontrollera om det finns ny data att hitta i 20 
 systemet antalet inlägg från klienten mot databasen. Om databasens längd är större så skickar den ut de nya inlägged,
 bryter loopen och presenterar det nya inlägget. Problemet med detta är att när systemet är i lopen så är den fast. Användaren trycker på knappen och sedan måste användaren vänta tills lopen är klar.
 
-. Det är såklart kostsamt att skicka så många förfrågningar så ofta.
+. ??? Det är såklart kostsamt att skicka så många förfrågningar så ofta. ???
 
 ### Optimering i Longpolling
 
