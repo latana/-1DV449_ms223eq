@@ -54,9 +54,9 @@ message är inte längre mottaglig för sql-injection.
 
 #### Övrigt
 
-**1**. Man kan ladda ner filen om man skriver in sökvägen till db.db i url'en.
-* **Risk** Vem som helst kan ladda ner databasen.
-* **Lösning** Lägg databasen utanför roten.
+**1**. Man kan ladda ner db.db om man skriver in sökvägen till db.db i url'en.
+* **Risk** Vem som helst kan ladda ner databasen och använda sig av en rainbowtable. 
+* **Lösning** Kollade upp men hittade inget på mitt webbhotel.
 
 ## Steg 2. Optimering
 
@@ -74,6 +74,43 @@ message är inte längre mottaglig för sql-injection.
 6. Jag minifierade css filen bootstrap detta gav runt 80kb mindre att hämta.
 
 7. Tog bort bootstrap.js och jquery.js.
+
+
+### Mätningar
+####Index.php
+
+* Jag har tagit bort css'en från index.php filen. Nu är den 20 milis snabbare men den hämta index.css som tar 145 milis.
+
+* Bootstrap.css har jag gjort till en mini variant och går nu 200 milis snabbare.
+* Eftersom bootstrap.js är borta så sparar jag 290 millis.
+
+Totalt hämtar det nya systemet 150 kb mindre.
+
+#### login
+
+* mess.php tar 260 millis. I denna filen har jag tagit bort css'en. placerat alla javascript längst ner och tagit bort onödiga inlänkningar. Den är nu 110 millis "långsammare".
+* longpoll.js är borta så där sparas 80 millis.
+* getMessages har en förbättring på 80 millis. Kan detta på bero på PDO?
+
+Totalt hämtar det nya systemet 2,8 kb MER
+
+#### ladda om mess.php
+
+* mess.php har en försämring på 10 millis.
+* bootstrap.css har en förbättring på 150 millis eftersom den är minifierad.
+* jquery har en förbättring på 217 millis eftersom den är minifierad.
+* messageboard.js har en förbättring på 10 millis. messageboard har jag "lagt till" men metod. jag förmodar att det är pga en tillfällighet på webhotelet.
+* script.js är borta vilket ger en förbättring på 316 millis.
+* b.jpg är borta bildet ger en förbättring på 340 millis.
+
+Totalt hämtar det nya systemet 700kb mer
+
+#### Logga ut
+
+* Jag har lagt till en sessionkiller.php som tar 90 millis att hämta.
+* index.php har en förbättring på 80 millis.
+
+Totalt hämtar det nya systemet 1kb mindre.
 
 ## Steg 3. Longpolling
 
