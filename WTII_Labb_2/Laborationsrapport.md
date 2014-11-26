@@ -79,8 +79,8 @@ message är inte längre mottaglig för sql-injection.
 
 Min longpolling börjar i messageBoard.js där getMessages anropar getMessages i get.php varje second. Efter varje
 förfrågan så börjar servern kontrollera om det finns ny data att hitta i 20 seconder. Under den tiden så kontrollerar
-systemet antalet inlägg från klienten mot databasen. Om databasens längd är större så skickar den ut de nya inlägged,
-bryter loopen och presenterar det nya inlägget. Problemet med detta är att när systemet är i lopen så är den fast. Användaren trycker på knappen och sedan måste användaren vänta tills lopen är klar.
+systemet antalet inlägg från klienten mot databasen. Om databasens längd är större så skickar den ut de nya inlägget,
+bryter loopen och presenterar det nya inlägget.
 
 . Det är såklart kostsamt att skicka så många förfrågningar så ofta men det kanske var därför webbsocet blev
   en värdig ersättare.
