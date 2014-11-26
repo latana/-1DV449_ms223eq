@@ -18,11 +18,11 @@ if(isset($_GET['function'])) {
 
 		$token = $_GET['token'];
 
-			if($_SESSION['token'] == $token){
+			if($_SESSION['token'] === $token){
 				addToDB($message, $name);
 			}
 			else{
-				//header("Location: mess.php");
+				header("Location: mess.php");
 			}
 		session_write_close();
     }

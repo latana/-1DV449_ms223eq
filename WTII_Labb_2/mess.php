@@ -42,7 +42,7 @@
                 Message: <br />
                 <textarea name="mess" id="inputText" cols="55" rows="6"></textarea>
                 <input class="btn btn-primary" type="button" id="buttonSend" value="Write your message" />
-                <input name "token" type="hidden" id='token' value="<?php echo $_SESSION['token'] ?>" />
+                <input name="token" type="hidden" id='token' value="<?php echo $_SESSION['token'] ?>" />
                 <span class="clear">&nbsp;</span>
 
             </div>

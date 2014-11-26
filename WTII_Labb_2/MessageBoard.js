@@ -6,10 +6,8 @@ var MessageBoard = {
 
     init:function(e)
     {
-    	
-    	 
-					MessageBoard.getAllMessages();
-					MessageBoard.getMessages();
+			MessageBoard.getAllMessages();
+			MessageBoard.getMessages();
 				
 	
 		    MessageBoard.textField = document.getElementById("inputText");
@@ -84,9 +82,7 @@ var MessageBoard = {
 				
 			}
 			document.getElementById("nrOfMessages").innerHTML = MessageBoard.messages.length;
-			
 		});
-
     },
     sendMessage:function(){
         

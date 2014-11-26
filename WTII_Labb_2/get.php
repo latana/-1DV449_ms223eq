@@ -22,7 +22,7 @@ function getMessages($arrayLength) {
 		if ($arrayLength < count($result)) {
 
 			$length = count($result) - $arrayLength;
-			$mess = array_splice($result, 0, $length,$preserve_keys = false);
+			$mess = array_splice($result, 0, $length, $preserve_keys = false);
 				
 			return $mess;
 		}
