@@ -84,7 +84,7 @@ message är inte längre mottaglig för sql-injection.
 * Bootstrap.css har jag gjort till en mini variant och går nu 200 milis snabbare.
 * Eftersom bootstrap.js är borta så sparar jag 290 millis.
 
-Totalt hämtar det nya systemet 150 kb mindre.
+**Totalt** hämtar det nya systemet 150 kb mindre.
 
 #### login
 
@@ -92,7 +92,7 @@ Totalt hämtar det nya systemet 150 kb mindre.
 * longpoll.js är borta så där sparas 80 millis.
 * getMessages har en förbättring på 80 millis. Kan detta på bero på PDO?
 
-Totalt hämtar det nya systemet 2,8 kb MER
+**Totalt** hämtar det nya systemet 2,8 kb MER
 
 #### ladda om mess.php
 
@@ -103,14 +103,14 @@ Totalt hämtar det nya systemet 2,8 kb MER
 * script.js är borta vilket ger en förbättring på 316 millis.
 * b.jpg är borta bildet ger en förbättring på 340 millis.
 
-Totalt hämtar det nya systemet 700kb mer
+**Totalt** hämtar det nya systemet 700kb mer
 
 #### Logga ut
 
 * Jag har lagt till en sessionkiller.php som tar 90 millis att hämta.
 * index.php har en förbättring på 80 millis.
 
-Totalt hämtar det nya systemet 1kb mindre.
+**Totalt** hämtar det nya systemet 1kb mindre.
 
 ## Steg 3. Longpolling
 
