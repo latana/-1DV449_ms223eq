@@ -1,6 +1,6 @@
 # Laborationsrapport
 
-[Länk till den publika relesen](https://www.google.com)
+[Länk till den publika relesen](http://latana.se/JavaScript/WebbteknikII/WTII_Labb_2/index.php)
 
 ## Steg 1. Säkerhetsbrister
 
