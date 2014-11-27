@@ -1,5 +1,7 @@
 # Laborationsrapport
 
+[Länk till den publika relesen](www.google.com)
+
 ## Steg 1. Säkerhetsbrister
 
 #### Inloggning
