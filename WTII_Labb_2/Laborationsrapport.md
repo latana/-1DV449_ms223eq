@@ -88,7 +88,7 @@ message är inte längre mottaglig för sql-injection.
 
 **Totalt** hämtar det nya systemet 150 kb mindre.
 
-#### login
+#### Login
 
 * mess.php tar 260 millis. I denna filen har jag tagit bort css'en. placerat alla javascript längst ner och tagit bort onödiga inlänkningar. Den är nu 110 millis "långsammare".
 * longpoll.js är borta så där sparas 80 millis.
@@ -96,7 +96,7 @@ message är inte längre mottaglig för sql-injection.
 
 **Totalt** hämtar det nya systemet 2,8 kb MER
 
-#### ladda om mess.php
+#### Ladda om mess.php
 
 * mess.php har en försämring på 10 millis.
 * bootstrap.css har en förbättring på 150 millis eftersom den är minifierad.
