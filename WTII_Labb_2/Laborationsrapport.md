@@ -1,6 +1,6 @@
 # Laborationsrapport
 
-[Länk till den publika relesen](www.google.com)
+[Länk till den publika relesen](https://www.google.com)
 
 ## Steg 1. Säkerhetsbrister
 
