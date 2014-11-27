@@ -9,6 +9,7 @@
 **1**.Både username och password tar emot taggar.
 
 * **Risk:** En ond användare skulle kunna skriva in javascript och window.location(www.opassande_webbplatts.com).
+Det spelar förvisso ingen roll så länge inte koden exikveras men man vet aldrig vad en ond användare kan hitta på. 
 * **Lösning:** Använder mig ut av strip_tags() functionen i check.php för att ta bort taggar i username och password.
 
 **2**.Man kan skriva vad som helst. Systemet kontrollerar inte username och password.
