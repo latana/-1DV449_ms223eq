@@ -1,0 +1,22 @@
+html,
+body,
+
+/**#map-canvas
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} **/
+
+#map-canvas
+{
+    height: 97%;
+    width: 85%;
+    overflow:auto;
+    margin: 0;
+    padding: 0;
+}
+
+.list{
+    float:right;
+}
