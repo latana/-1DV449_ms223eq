@@ -3,24 +3,38 @@
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <title></title>
 </head>
 <body>
-<div id="map-canvas"></div>
-<div class="list">
-    <select>
-        <option value="0">Vägtrafik</option>
-        <option value="1">Kollektivtrafik</option>
-        <option value="3">Planerad störning</option>
-        <option value="4">Övrigt</option>
-        <option value="5">Alla kategorier</option>
-    </select>
+
+<div class="container-fluid">
+
+    <div id="map-canvas" class="col-md-8"></div>
+
+    <div class="dropDown col-md-4">
+        <select class="switch col-md-5">
+            <option value="0">Vägtrafik</option>
+            <option value="1">Kollektivtrafik</option>
+            <option value="2">Planerad störning</option>
+            <option value="3">Övrigt</option>
+            <option value="4" selected>Alla kategorier</option>
+        </select>
+    </div>
+    <div class="list col-md-4">
+        <ul id="ul">
+
+        </ul>
+    </div>
 </div>
+
 </body>
 <script src="js/jquery-1.11.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmGcaMA7rcCQ2bkbOOfLb8hrjBz3qF6tQ">
 </script>
+<script src="js/markerBox.js"></script>
 <script src="js/googlemap.js"></script>
 
 </html>

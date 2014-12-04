@@ -10,13 +10,15 @@ body,
 
 #map-canvas
 {
-    height: 97%;
-    width: 85%;
+    height: 506px;
     overflow:auto;
-    margin: 0;
-    padding: 0;
 }
 
-.list{
+.dropDown{
     float:right;
+}
+
+.ul{
+    max-height:50px;
+    overflow:auto;
 }
