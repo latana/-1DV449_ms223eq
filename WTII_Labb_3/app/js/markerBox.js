@@ -1,0 +1,52 @@
+/**
+ * Created by Latana on 2014-12-04.
+ */
+function markerBox(message){
+
+    var date = new Date(parseInt(message.createddate.replace("/Date(", "").replace(")/",""), 10));
+
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var milli = date.getTime();
+
+    if(message.description == ''){
+        message.description = "Information saknas";
+    }
+    if(message.exactlocation == ''){
+        message.exactlocation = "Information saknas";
+    }
+    if(day < 10){
+        day = '0' + day;
+    }
+
+    var infoString = "<div id='content'>"+
+        "<div id='siteNotice'>"+
+        "</div>"+
+        "<h1 id='firstHeading' class='firstHeading'>"+message.title+"</h1>"+
+        "<h3>Kategori: "+message.subcategory+"</h3>"+
+        "<div id='bodyContent'>"+
+        "<p>Beskrivning: "+message.description+"</p>"+
+        "<p>Datum : "+year +"-"+ month +"-"+ day+ " " + hour + ":" + min + "</p>"+
+        "<p>Detaljerad beskrivning: "+ message.exactlocation+ "</p>"+
+        "</div>"+
+        "</div>";
+
+    //makeList(message);
+
+    return infoString;
+}
+
+function makeList(message){
+
+    var ul=document.getElementById('ul');
+    var li=document.createElement('li');
+    var a=document.createElement('a');
+    a.title = message.exactlocation;
+    a.href = "javascript:marker(0)";
+    li.appendChild(a);
+    ul.appendChild(li);
+    a.innerHTML=a.innerHTML + message.title;
+}

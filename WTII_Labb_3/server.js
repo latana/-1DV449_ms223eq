@@ -4,8 +4,8 @@ var application_root = __dirname,
     bodyParser      = require('body-parser'), // (since Express 4.0.0)
     errorHandler    = require('errorhandler'), // (since Express 4.0.0)
     path            = require( 'path' ), // Utilities for dealing with file
-    request         = require('request');
-    fs              = require('fs');
+    request         = require('request'),
+    fs              = require('fs'),
     app             = express();
 
 var env = process.env.NODE_ENV || 'development';
@@ -30,6 +30,17 @@ var server = app.listen( port, ipaddr, function() {
         port, app.settings.env );
 });
 
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(client){
+
+    client.emit('load', JSON.parse(fs.readFileSync('trafikFile.json')));
+    client.on('my other event', function(data){
+        console.log(data);
+    });
+
+});
+
 app.get('/map', function(req, res) {
 
  /**   request('http://api.sr.se/api/v2/traffic/messages?format=json&size=5000&indent=true', function(error, response, body){
@@ -43,5 +54,5 @@ app.get('/map', function(req, res) {
             res.send(JSON.parse(body));
         }
     }); **/
- res.send(JSON.parse(fs.readFileSync('trafikFile.json')));
+ //res.send(JSON.parse(fs.readFileSync('trafikFile.json')));
 });
