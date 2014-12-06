@@ -1,21 +1,28 @@
 /**
  * Created by Latana on 2014-12-01.
  */
+
+/**
+ * TODO
+ * 1. Cashnings strategi! (vad händer om radioapiet lägger ner)
+ * 2. Säkerhet
+ * 3. Bootstrap
+ * 4. io.connect('http://localhost:8000'); När du lägger upp publikt
+ */
 function initialize() {
 
-    var hybrid = [];
-    var roadTrafic = [];
-    var publicTransport = [];
-    var scheduledInterference = [];
-    var other = [];
-    var all = [];
+    var firstRender = true;
 
     var socket = io.connect('http://localhost:8000');
     socket.on('load', function(data){
 
-        socket.emit('my other event', {client: "Here is client"});
+        var roadTrafic = [];
+        var publicTransport = [];
+        var scheduledInterference = [];
+        var other = [];
+        var all = [];
 
-            hybrid = data['messages'].reverse().slice(0,100).map(function(message, i){
+            all = data['messages'].reverse().slice(0,100).map(function(message, i){
 
                 return {
                     title: message.title,
@@ -29,9 +36,7 @@ function initialize() {
                 }
             });
 
-        hybrid.forEach(function(message){
-
-            all.push(message);
+        all.forEach(function(message){
 
             switch(Number(message.category)) {
                 case 0:
@@ -70,12 +75,15 @@ function initialize() {
                 case 3:
                      render.createMarkers(other);
                     break;
-                default :
+                default:
                     render.createMarkers(all);
                     break;
             }
         });
-        render.createMarkers(hybrid);
+        if(firstRender === true) {
+            firstRender = false;
+            render.createMarkers(all);
+        }
     });
 
     var map;
@@ -85,7 +93,8 @@ function initialize() {
         addMarker: function(){
 
         },
-        createMarkers: function(hybrid){
+        createMarkers: function(data){
+
             render.markers.forEach(function(marker){
 
                 marker.setMap(null);
@@ -93,9 +102,9 @@ function initialize() {
             render.markers = [];
             var previousMarker;
 
-            hybrid.forEach(function(message){
+            data.forEach(function(message){
 
-                var infoString = markerBox(message);
+                var infoString = createInfoString(message);
                 var position = new google.maps.LatLng(message.latitude, message.longitude);
 
                 var marker = new google.maps.Marker({
@@ -108,14 +117,7 @@ function initialize() {
                 });
                 render.markers.push(marker);
 
-                var ul=document.getElementById('ul');
-                var li=document.createElement('li');
-                var a=document.createElement('a');
-                a.title = message.exactlocation;
-                a.href = "";
-                li.appendChild(a);
-                ul.appendChild(li);
-                a.textContent=a.textContent + message.title;
+                var li = createList(message);
 
                 google.maps.event.addListener(marker, 'click', function(){
 
@@ -139,7 +141,7 @@ function initialize() {
         }
     };
 
-    var latLng = new google.maps.LatLng(56.66282, 16.35524);
+    var latLng = new google.maps.LatLng(62.56282, 13.35524);
     var mapOptions = {
         center: latLng,
         zoom: 5,
@@ -148,4 +150,17 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
+function createList(message){
+
+    var ul=document.getElementById('ul');
+    var li=document.createElement('li');
+    var a=document.createElement('a');
+    a.title = message.exactlocation;
+    a.href = "";
+    li.appendChild(a);
+    ul.appendChild(li);
+    a.textContent=a.textContent + message.title;
+
+    return li;
+}
 google.maps.event.addDomListener(window, 'load', initialize);

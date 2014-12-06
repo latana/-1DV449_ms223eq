@@ -10,15 +10,14 @@ body,
 
 #map-canvas
 {
-    height: 506px;
-    overflow:auto;
+    height: 650px;
 }
 
 .dropDown{
-    float:right;
+
 }
 
-.ul{
-    max-height:50px;
+#ul{
     overflow:auto;
+    height:620px;
 }

@@ -1,7 +1,7 @@
 /**
  * Created by Latana on 2014-12-04.
  */
-function markerBox(message){
+function createInfoString(message){
 
     var date = new Date(parseInt(message.createddate.replace("/Date(", "").replace(")/",""), 10));
 
@@ -34,19 +34,5 @@ function markerBox(message){
         "</div>"+
         "</div>";
 
-    //makeList(message);
-
     return infoString;
-}
-
-function makeList(message){
-
-    var ul=document.getElementById('ul');
-    var li=document.createElement('li');
-    var a=document.createElement('a');
-    a.title = message.exactlocation;
-    a.href = "javascript:marker(0)";
-    li.appendChild(a);
-    ul.appendChild(li);
-    a.innerHTML=a.innerHTML + message.title;
 }
