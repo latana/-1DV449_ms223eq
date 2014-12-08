@@ -7,17 +7,48 @@ body,
     margin: 0;
     padding: 0;
 } **/
-
 #map-canvas
 {
-    height: 650px;
+    height: 550px;
+}
+
+.header{
+    width:21%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.header h1{
+    font-style: oblique;
+    font-style: italic;
 }
 
 .dropDown{
 
 }
 
-#ul{
+.switch{
+    text-align:center;
+}
+
+.ul{
     overflow:auto;
-    height:620px;
+    height:510px;
+    list-style-type: none;
+    background-color:lightgoldenrodyellow;
+}
+
+.li{
+    text-align:left;
+    color:black;
+    width:100%;
+}
+
+.li :hover{
+    color:blueviolet;
+    text-decoration: none;
+}
+
+.a{
+    color:black;
 }

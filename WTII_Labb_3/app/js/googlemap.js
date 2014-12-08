@@ -140,7 +140,7 @@ function initialize() {
                 // prevent href action to be called.
                 e.preventDefault();
 
-                if(e.target.nodeName === 'LI'){
+                if(e.target.nodeName !== 'A'){
                     return false;
                 }
                 else {
@@ -161,10 +161,13 @@ function initialize() {
 
 function createList(message,i){
 
+    var ul = document.getElementById('ul');
     var li=document.createElement('li');
+    li.setAttribute('class', 'li');
     var a=document.createElement('a');
     a.title = message.exactlocation;
     a.href = "";
+    a.setAttribute('class', 'a');
     li.appendChild(a);
     ul.appendChild(li);
     a.setAttribute('id', i);
