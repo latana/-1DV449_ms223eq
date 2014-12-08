@@ -47,21 +47,28 @@ var update = function(){
     request(url, function (err, resp, data){
 
         if(err !== true && resp.statusCode== 200){
-            try{
-                var jsonData = JSON.parse(data);
-                parse = jsonData;
-                io.sockets.emit('load', jsonData);
-                fs.writeFile('trafikFile.json', data, function(err){
 
-                    if(err) throw err;
-                });
+            var jsonData = JSON.parse(data);
+            if(JSON.stringify(jsonData) !== JSON.stringify(parse)) {
+
+                try {
+                    parse = jsonData;
+                    io.sockets.emit('load', jsonData);
+                    fs.writeFile('trafikFile.json', data, function (err) {
+
+                        if (err) throw err;
+                    });
+                }
+                catch (e) {
+                    fs.writeFile('trafikFile.json', "{}");
+                }
             }
-            catch(e){
-                fs.writeFile('trafikFile.json', "{}");
+            else{
+                console.log('Ingen ny data');
             }
         }
     });
-}
+};
 
 update();
 setInterval(update, 300000);
@@ -69,6 +76,7 @@ setInterval(update, 300000);
 io.sockets.on('connection', function(client){
 
     //client.emit('load',JSON.parse(fs.readFileSync('trafikFile.json')));
+
     client.emit('load', parse);
     //client.on('my other event', function(data){
 

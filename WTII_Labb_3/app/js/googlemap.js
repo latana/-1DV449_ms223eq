@@ -21,6 +21,7 @@ function initialize() {
         var scheduledInterference = [];
         var other = [];
         var all = [];
+        var allSorted = [];
 
             all = data['messages'].reverse().slice(0,100).map(function(message, i){
 
@@ -36,7 +37,9 @@ function initialize() {
                 }
             });
 
-        all.forEach(function(message){
+        allSorted = deleteCopy(all);
+
+        allSorted.forEach(function(message){
 
             switch(Number(message.category)) {
                 case 0:
@@ -52,10 +55,9 @@ function initialize() {
                     other.push(message);
                     break;
             }
-        })
+        });
 
         var selected = document.querySelector('.switch');
-        var number = selected.options[selected.selectedIndex].value;
 
         selected.addEventListener('change', function(e){
 
@@ -76,13 +78,13 @@ function initialize() {
                      render.createMarkers(other);
                     break;
                 default:
-                    render.createMarkers(all);
+                    render.createMarkers(allSorted);
                     break;
             }
         });
         if(firstRender === true) {
             firstRender = false;
-            render.createMarkers(all);
+            render.createMarkers(allSorted);
         }
     });
 
@@ -90,9 +92,7 @@ function initialize() {
     var render = {
 
         markers:[],
-        addMarker: function(){
 
-        },
         createMarkers: function(data){
 
             render.markers.forEach(function(marker){
@@ -162,5 +162,16 @@ function createList(message){
     a.textContent=a.textContent + message.title;
 
     return li;
+}
+
+function deleteCopy(array){
+
+    var copy = {};
+
+    var filterdArray = array.filter(function(item){
+        return copy.hasOwnProperty(item.title) ? false : (copy[item.title] = true);
+    });
+    return filterdArray;
+
 }
 google.maps.event.addDomListener(window, 'load', initialize);
