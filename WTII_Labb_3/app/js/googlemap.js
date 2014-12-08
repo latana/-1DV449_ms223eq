@@ -58,10 +58,11 @@ function initialize() {
         });
 
         var selected = document.querySelector('.switch');
+        var list = document.getElementById("ul");
+
 
         selected.addEventListener('change', function(e){
 
-            var list = document.getElementById("ul");
             list.textContent="";
 
             switch(e.target.options.selectedIndex) {
@@ -85,6 +86,7 @@ function initialize() {
         if(firstRender === true) {
             firstRender = false;
             render.createMarkers(allSorted);
+
         }
     });
 
@@ -102,7 +104,7 @@ function initialize() {
             render.markers = [];
             var previousMarker;
 
-            data.forEach(function(message){
+            data.forEach(function(message,i){
 
                 var infoString = createInfoString(message);
                 var position = new google.maps.LatLng(message.latitude, message.longitude);
@@ -116,8 +118,7 @@ function initialize() {
                         })
                 });
                 render.markers.push(marker);
-
-                var li = createList(message);
+                createList(message, i);
 
                 google.maps.event.addListener(marker, 'click', function(){
 
@@ -130,13 +131,21 @@ function initialize() {
                     marker.infoWindow.open(map,marker);
                     previousMarker = marker;
                 });
+            });
 
-                google.maps.event.addDomListener(li, "click", function(e){
+            var ul=document.getElementById('ul');
 
-                    // prevent href action to be called.
-                    e.preventDefault();
-                    google.maps.event.trigger(marker, "click");
-                });
+            google.maps.event.addDomListener(ul, "click", function(e){
+
+                // prevent href action to be called.
+                e.preventDefault();
+
+                if(e.target.nodeName === 'LI'){
+                    return false;
+                }
+                else {
+                    google.maps.event.trigger(render.markers[e.target.id], "click");
+                }
             });
         }
     };
@@ -150,15 +159,15 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
-function createList(message){
+function createList(message,i){
 
-    var ul=document.getElementById('ul');
     var li=document.createElement('li');
     var a=document.createElement('a');
     a.title = message.exactlocation;
     a.href = "";
     li.appendChild(a);
     ul.appendChild(li);
+    a.setAttribute('id', i);
     a.textContent=a.textContent + message.title;
 
     return li;
