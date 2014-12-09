@@ -22,7 +22,8 @@ betyder det att det blivit en uppdatering och presenterar denna datan. Annars v�
 
 **Vad finns det för risker med din applikation?**
 
-- Systemet är starkt beroende av apierna.
+- Systemet är starkt beroende av apierna. Sveriges radio finns det lite säkerhet i med cashningsstrategin men
+  skulle google mot förmodan gå ner så finns det ingenting som hanterar detta.
 
 **Hur har du tänkt kring säkerheten i din applikation?**
 
