@@ -30,9 +30,6 @@ betyder det att det blivit en uppdatering och presenterar denna datan. Annars v�
 - Om elak data skulle komma in fr책n Sveriges Radio s책 spelar det ingen roll d책 jag skriver ut med textContent.
 Det blir inte vidare snygg p책 webbplattsen men den exikveras inte.
 
-
-- All javascript som kan skriva i href l채nkarna ignoreras.
-
 **Hur har du t채nkt kring optimeringen i din applikation?**
 
 - Minifiera filerna
