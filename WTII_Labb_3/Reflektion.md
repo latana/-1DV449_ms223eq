@@ -36,4 +36,4 @@ Det blir inte vidare snygg på webbplattsen men den exikveras inte.
 
 - Minifiera filerna
 - Inga onödiga anrop.
-- Skapa endast lyssnare som krävs.
+- Skapa endast de lyssnare som krävs på knapparna.
