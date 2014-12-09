@@ -12,13 +12,12 @@
 **Sveriges Radios:** Systemet får inte använda apiet för att på något sätt skada Sveriges Radio. Det finns inte
 några begränsningar för antal anrop men de föredrar att man ska vara "snäll" mot deras api.
 
-**Google:** Systemet får inte överskrida 25000 anrop under 90 dagar. Om det nu skulle bli så kontaktar google den ansvarige
-och talas vid om betalning.
+**Google:** Systemet får inte överskrida 25000 anrop under 90 dagar. Om det nu skulle bli så kontaktar google den ansvarige och talas vid om betalning.
 
 **Hur och hur länga cachar du ditt data för att slippa anropa API:erna i onödan?**
 
 - Var 5 minut gör systemet ett anrop och om datan den fått inte är den samma som det i sin cachade data 
-betyder det att det blivit en uppdatering och presenterar denna datan. Annars väntar systemet 5 minuter till.
+betyder det att det blivit en uppdatering och sparar i json-filen för att sedan presentera datan. Annars väntar systemet 5 minuter till.
 
 **Vad finns det för risker med din applikation?**
 
@@ -28,10 +27,10 @@ betyder det att det blivit en uppdatering och presenterar denna datan. Annars v�
 **Hur har du tänkt kring säkerheten i din applikation?**
 
 - Om elak data skulle komma in från Sveriges Radio så spelar det ingen roll då jag skriver ut med textContent.
-Det blir inte vidare snygg på webbplattsen men den exikveras inte.
+Det blir inte vidare snygg på webbplattsen men den exikveras inte i alla fall.
 
 **Hur har du tänkt kring optimeringen i din applikation?**
 
-- Minifiera filerna
-- Inga onödiga anrop.
-- Skapa endast de lyssnare som krävs på knapparna.
+- Alla Js och css filer har jag minifierat och unglyfierat för att få lite snabbare prestanda. 
+- Jag har gjort så gott jag kan för att inte göra några onödiga förfrågningar.
+- När jag sätter ut lyssnare så ser jag till att det skapas just bara de som krävs. I tidigare testning då jag gjorde en ny förfrågan varje minut så skapas nya lyssnare varje gång det kom ut ny data vilket tog hårt på prestandan efter 5 minuter.
