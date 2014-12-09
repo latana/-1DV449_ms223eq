@@ -75,33 +75,9 @@ setInterval(update, 300000);
 
 io.sockets.on('connection', function(client){
 
-    //client.emit('load',JSON.parse(fs.readFileSync('trafikFile.json')));
-
     client.emit('load', parse);
-    //client.on('my other event', function(data){
-
-
-  /**  var interval = setInterval(function(){
-
-            request('http://api.sr.se/api/v2/traffic/messages?format=json&size=5000&indent=true', function (error, response, body) {
-
-                if (!error && response.statusCode == 200) {
-
-                        fs.writeFile('trafikFile.json', body, function (error) {
-
-                            console.log('Saved to file!');
-                          //  client.emit(JSON.parse(body));
-                        });
-                    }
-            });
-            console.log('jag kör');
-          //  client.emit('load', JSON.parse(fs.readFileSync('trafikFile.json')));
-    }, 9000); **/
-    // });
 });
 
 app.get('/map', function(req, res) {
 
-
- //res.send(JSON.parse(fs.readFileSync('trafikFile.json')));
 });

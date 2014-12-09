@@ -2,13 +2,6 @@
  * Created by Latana on 2014-12-01.
  */
 
-/**
- * TODO
- * 1. Cashnings strategi! (vad händer om radioapiet lägger ner)
- * 2. Säkerhet
- * 3. Bootstrap
- * 4. io.connect('http://localhost:8000'); När du lägger upp publikt
- */
 function initialize() {
 
     var firstRender = true;
@@ -137,7 +130,6 @@ function initialize() {
 
             google.maps.event.addDomListener(ul, "click", function(e){
 
-                // prevent href action to be called.
                 e.preventDefault();
 
                 if(e.target.nodeName !== 'A'){
