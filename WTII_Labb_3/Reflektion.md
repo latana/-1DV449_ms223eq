@@ -1,5 +1,12 @@
 # Reflektion
 
+#### Filer av intresse
+
+1.[index.html](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Labb_3/app/index.html)
+2.[server.js](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Labb_3/server.js)
+3.[googlemaps.js](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Labb_3/app/js/googlemap.js)
+4.[markbox.js](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Labb_3/app/js/markerBox.js)
+
 **Vad finns det för krav du måste anpassa dig efter i de olika API:erna?**
 
 **Sveriges Radios:** Systemet får inte använda apiet för att på något sätt skada Sveriges Radio. Det finns inte
