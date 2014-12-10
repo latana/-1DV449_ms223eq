@@ -25,14 +25,19 @@ function createInfoString(message){
     var infoString = "<div id='content'>"+
         "<div id='siteNotice'>"+
         "</div>"+
-        "<h1 id='firstHeading' class='firstHeading'>"+message.title+"</h1>"+
-        "<h3>Kategori: "+message.subcategory+"</h3>"+
+        "<h1 id='firstHeading' class='firstHeading'>"+striptaggs(message.title)+"</h1>"+
+        "<h3>Kategori: "+striptaggs(message.subcategory)+"</h3>"+
         "<div id='bodyContent'>"+
-        "<p>Beskrivning: "+message.description+"</p>"+
+        "<p>Beskrivning: "+striptaggs(message.description)+"</p>"+
         "<p>Datum : "+year +"-"+ month +"-"+ day+ " " + hour + ":" + min + "</p>"+
-        "<p>Detaljerad beskrivning: "+ message.exactlocation+ "</p>"+
+        "<p>Detaljerad beskrivning: "+ striptaggs(message.exactlocation)+ "</p>"+
         "</div>"+
         "</div>";
 
     return infoString;
 }
+
+function striptaggs (string){
+
+    return string.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
