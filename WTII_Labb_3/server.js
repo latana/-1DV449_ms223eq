@@ -77,7 +77,3 @@ io.sockets.on('connection', function(client){
 
     client.emit('load', parse);
 });
-
-app.get('/map', function(req, res) {
-
-});

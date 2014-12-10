@@ -182,18 +182,6 @@
       "subcategory": "Vägarbete"
     },
     {
-      "id": 1299343,
-      "priority": 3,
-      "createddate": "\/Date(1416998109833+0100)\/",
-      "title": "Rv 70 Enköping-Sala",
-      "exactlocation": "Vid Fjärdhundra",
-      "description": "Broarbete med sänkt hastighet. ",
-      "latitude": 59.769515991210938,
-      "longitude": 16.911821365356445,
-      "category": 0,
-      "subcategory": "Vägarbete"
-    },
-    {
       "id": 1299462,
       "priority": 3,
       "createddate": "\/Date(1417010976087+0100)\/",
@@ -998,18 +986,6 @@
       "subcategory": "Tåg"
     },
     {
-      "id": 1304204,
-      "priority": 3,
-      "createddate": "\/Date(1418188063797+0100)\/",
-      "title": "Gränna-Visingsö",
-      "exactlocation": "",
-      "description": "Förseningar i färjetrafiken under onsdagen p.g.a. hård vind. Braheborg är tagen ur trafik. Ebba Brahe ersätter, vilket innebär reducerad kapacitet. Gäller t o m den 12/12.",
-      "latitude": 58.034072875976562,
-      "longitude": 14.349037170410156,
-      "category": 1,
-      "subcategory": "Färja"
-    },
-    {
       "id": 1302300,
       "priority": 3,
       "createddate": "\/Date(1418188783100+0100)\/",
@@ -1082,18 +1058,6 @@
       "subcategory": "Vägarbete"
     },
     {
-      "id": 1307903,
-      "priority": 3,
-      "createddate": "\/Date(1418195275117+0100)\/",
-      "title": "Gammlestaden",
-      "exactlocation": "Artillerigatan/Treriksgatan.",
-      "description": "Släckta signaler korsningen för arbete.",
-      "latitude": 57.729484558105469,
-      "longitude": 12.014447212219238,
-      "category": 0,
-      "subcategory": "Vägarbete"
-    },
-    {
       "id": 1307962,
       "priority": 3,
       "createddate": "\/Date(1418197258037+0100)\/",
@@ -1118,42 +1082,6 @@
       "subcategory": "Halkvarning"
     },
     {
-      "id": 1307969,
-      "priority": 3,
-      "createddate": "\/Date(1418197763320+0100)\/",
-      "title": "Söderleden",
-      "exactlocation": "Sisjömotet",
-      "description": "Strax efter motet mot Frölunda, olycka, Räddningstjänst på plats. Helt stopp i trafiken.",
-      "latitude": 57.645998709384969,
-      "longitude": 11.945087561122326,
-      "category": 0,
-      "subcategory": "Trafikolycka"
-    },
-    {
-      "id": 1256516,
-      "priority": 3,
-      "createddate": "\/Date(1418197994740+0100)\/",
-      "title": "Norrbottens län ",
-      "exactlocation": " ",
-      "description": "Risk för ishalka längs inlandet och kusten. Risk för snöhalka i fjälltrakterna.",
-      "latitude": 66.74946,
-      "longitude": 21.38291,
-      "category": 0,
-      "subcategory": "Halkvarning"
-    },
-    {
-      "id": 1264254,
-      "priority": 3,
-      "createddate": "\/Date(1418198001240+0100)\/",
-      "title": "Västernorrlands län ",
-      "exactlocation": "   ",
-      "description": "Risk för ishalka pga nederbörd faller på kalla vägbanor. I Inlandet som snö och längs kusten som snöblandat regn.",
-      "latitude": 62.8307724,
-      "longitude": 17.636301,
-      "category": 0,
-      "subcategory": "Halkvarning"
-    },
-    {
       "id": 1302696,
       "priority": 5,
       "createddate": "\/Date(1418198314523+0100)\/",
@@ -1166,18 +1094,6 @@
       "subcategory": "Vägarbete"
     },
     {
-      "id": 1264248,
-      "priority": 3,
-      "createddate": "\/Date(1418198894063+0100)\/",
-      "title": "Jämtlands län     ",
-      "exactlocation": "",
-      "description": "Risk för snöhalka under dagen.",
-      "latitude": 63.4809952,
-      "longitude": 14.326333,
-      "category": 0,
-      "subcategory": "Halkvarning"
-    },
-    {
       "id": 1307911,
       "priority": 3,
       "createddate": "\/Date(1418198900020+0100)\/",
@@ -1186,30 +1102,6 @@
       "description": "Vägarbete mot Mölndal, räkna med köer under dagen fram till 15:00.",
       "latitude": 57.645782470703125,
       "longitude": 11.957850456237793,
-      "category": 0,
-      "subcategory": "Vägarbete"
-    },
-    {
-      "id": 1264256,
-      "priority": 3,
-      "createddate": "\/Date(1418198008913+0100)\/",
-      "title": "Västerbottens län ",
-      "exactlocation": "",
-      "description": "Risk för ishalka längs kusten pga nederbörd på kalla vägar. Risk för snöhalka i inlandet och i fjälltrakterna.",
-      "latitude": 64.9181442,
-      "longitude": 18.94519,
-      "category": 0,
-      "subcategory": "Halkvarning"
-    },
-    {
-      "id": 1308004,
-      "priority": 3,
-      "createddate": "\/Date(1418199230943+0100)\/",
-      "title": "E22 Mönsterår",
-      "exactlocation": "",
-      "description": "Trafiken regleras av trafikvakter under onsdag förmiddag.",
-      "latitude": 57.028213500976562,
-      "longitude": 16.43162727355957,
       "category": 0,
       "subcategory": "Vägarbete"
     },
@@ -1246,30 +1138,6 @@
       "description": "Mycket lera på vägen p.g.a. grävningaarbete på en åker vid vägen. Halka och besvär för trafiken.",
       "latitude": 58.481620005353037,
       "longitude": 15.999125809001962,
-      "category": 0,
-      "subcategory": "Trafikstörning"
-    },
-    {
-      "id": 1307982,
-      "priority": 3,
-      "createddate": "\/Date(1418199698627+0100)\/",
-      "title": "E10 Gällivare-Moskojärvi",
-      "exactlocation": "Muorjevaarabacken. ",
-      "description": "Lastbil som blockerar vägen riktning Skaulo. Bärgningsbil beräknas ankomma platsen kl 10:00.",
-      "latitude": 67.196159362792969,
-      "longitude": 20.97929573059082,
-      "category": 0,
-      "subcategory": "Trafikstörning"
-    },
-    {
-      "id": 1308013,
-      "priority": 3,
-      "createddate": "\/Date(1418199717427+0100)\/",
-      "title": "Lv 1066 Högland-Faresta",
-      "exactlocation": "",
-      "description": "Flera bilar har fastnat i en backe. ",
-      "latitude": 63.330696105957031,
-      "longitude": 18.730003356933594,
       "category": 0,
       "subcategory": "Trafikstörning"
     },
@@ -1322,30 +1190,6 @@
       "subcategory": "Färja"
     },
     {
-      "id": 1308056,
-      "priority": 3,
-      "createddate": "\/Date(1418201484320+0100)\/",
-      "title": "Rv 19 Hanaskog–Knislinge",
-      "exactlocation": "I riktning mot Knislinge",
-      "description": "Buss med haveri",
-      "latitude": 56.167945861816406,
-      "longitude": 14.101624488830566,
-      "category": 0,
-      "subcategory": "Trafikstörning"
-    },
-    {
-      "id": 1308042,
-      "priority": 3,
-      "createddate": "\/Date(1418201523753+0100)\/",
-      "title": "Göteborg-Kungsbacka",
-      "exactlocation": "",
-      "description": "Förseningar på sträckan förbi Mölndal. Reparatör på väg.",
-      "latitude": 57.435973823644858,
-      "longitude": 12.217613786989459,
-      "category": 1,
-      "subcategory": "Tåg"
-    },
-    {
       "id": 1304855,
       "priority": 4,
       "createddate": "\/Date(1418201548073+0100)\/",
@@ -1370,30 +1214,6 @@
       "subcategory": "Vägarbete"
     },
     {
-      "id": 1307899,
-      "priority": 3,
-      "createddate": "\/Date(1418202208183+0100)\/",
-      "title": "Gävle-Borlänge",
-      "exactlocation": "",
-      "description": "Förseningar i tågtrafiken kan förekomma under morgonen.",
-      "latitude": 60.607997424726413,
-      "longitude": 16.633909488264088,
-      "category": 1,
-      "subcategory": "Tåg"
-    },
-    {
-      "id": 1307859,
-      "priority": 3,
-      "createddate": "\/Date(1418202261503+0100)\/",
-      "title": "Lv 975  Arnöleden, i båda riktningar.",
-      "exactlocation": "",
-      "description": "Tung trafik kan inte åka med färjan på grund av hård vind.",
-      "latitude": 59.499851226806641,
-      "longitude": 17.146011352539063,
-      "category": 1,
-      "subcategory": "Färja"
-    },
-    {
       "id": 1307727,
       "priority": 3,
       "createddate": "\/Date(1418202304477+0100)\/",
@@ -1404,30 +1224,6 @@
       "longitude": 12.777752503880187,
       "category": 3,
       "subcategory": "Övrigt"
-    },
-    {
-      "id": 1307980,
-      "priority": 3,
-      "createddate": "\/Date(1418202328350+0100)\/",
-      "title": "Enskede",
-      "exactlocation": "Sockenvägen, påfart till Rv73 Nynäsvägen mot Stockholm",
-      "description": "Påfarten avstängd, byggnadsställning håller på att rasa",
-      "latitude": 59.279950235445391,
-      "longitude": 18.09219812444044,
-      "category": 0,
-      "subcategory": "Trafikstörning"
-    },
-    {
-      "id": 1308068,
-      "priority": 3,
-      "createddate": "\/Date(1418202398907+0100)\/",
-      "title": "E16 Storvik-Gävle",
-      "exactlocation": "Näsbysjöns rastplats öster om Storvik",
-      "description": "Lastbil med punktering på enfilig sträcka.",
-      "latitude": 60.582275390625,
-      "longitude": 16.539737701416016,
-      "category": 0,
-      "subcategory": "Trafikstörning"
     },
     {
       "id": 1307904,
@@ -1502,18 +1298,6 @@
       "subcategory": "Väder"
     },
     {
-      "id": 1306500,
-      "priority": 3,
-      "createddate": "\/Date(1418204275460+0100)\/",
-      "title": "Roma",
-      "exactlocation": "Romabadet",
-      "description": "Badet är åter öppet med ordinarie öppettider.",
-      "latitude": 57.511532244727334,
-      "longitude": 18.448650510663544,
-      "category": 3,
-      "subcategory": "Övrigt"
-    },
-    {
       "id": 1307726,
       "priority": 3,
       "createddate": "\/Date(1418204976303+0100)\/",
@@ -1524,18 +1308,6 @@
       "longitude": 14.778980075329462,
       "category": 3,
       "subcategory": "Väder"
-    },
-    {
-      "id": 1308111,
-      "priority": 3,
-      "createddate": "\/Date(1418205159167+0100)\/",
-      "title": "Rv 47 Falköping-Grästorp",
-      "exactlocation": "I höjd med Vara, korsningen rv 47/lv 187",
-      "description": "Ett körfält blockerat. Lastbil och personbil inblandade i olycka. Polis på plats. ",
-      "latitude": 58.294769287109375,
-      "longitude": 12.961159706115723,
-      "category": 0,
-      "subcategory": "Trafikolycka"
     },
     {
       "id": 1307902,
@@ -1644,12 +1416,228 @@
       "longitude": 12.027989387512207,
       "category": 0,
       "subcategory": "Vägarbete"
+    },
+    {
+      "id": 1306339,
+      "priority": 4,
+      "createddate": "\/Date(1418206160787+0100)\/",
+      "title": "Blodmobilen",
+      "exactlocation": "Volvo SA Gustav Larssons väg",
+      "description": "10/12 08:30-15:00.",
+      "latitude": 57.757404462672142,
+      "longitude": 11.882504556327131,
+      "category": 3,
+      "subcategory": "Hälsa och sjukvård"
+    },
+    {
+      "id": 1308140,
+      "priority": 3,
+      "createddate": "\/Date(1418206174320+0100)\/",
+      "title": "Rv 92 Bjurholm-Vännäs",
+      "exactlocation": "Penglund. ",
+      "description": "Bärgningsarbete. ",
+      "latitude": 63.907707214355469,
+      "longitude": 19.669668197631836,
+      "category": 0,
+      "subcategory": "Trafikstörning"
+    },
+    {
+      "id": 1308013,
+      "priority": 3,
+      "createddate": "\/Date(1418206183443+0100)\/",
+      "title": "Lv 1066 Högland-Faresta",
+      "exactlocation": "",
+      "description": "Flera bilar har fastnat i en backe. ",
+      "latitude": 63.330696105957031,
+      "longitude": 18.730003356933594,
+      "category": 0,
+      "subcategory": "Trafikstörning"
+    },
+    {
+      "id": 1264256,
+      "priority": 3,
+      "createddate": "\/Date(1418206519113+0100)\/",
+      "title": "Västerbottens län ",
+      "exactlocation": "",
+      "description": "Risk för ishalka längs kusten pga nederbörd på kalla vägar. Risk för snöhalka i inlandet och i fjälltrakterna.",
+      "latitude": 64.9181442,
+      "longitude": 18.94519,
+      "category": 0,
+      "subcategory": "Halkvarning"
+    },
+    {
+      "id": 1264254,
+      "priority": 3,
+      "createddate": "\/Date(1418206532417+0100)\/",
+      "title": "Västernorrlands län ",
+      "exactlocation": "   ",
+      "description": "Risk för ishalka pga nederbörd faller på kalla vägbanor. I Inlandet som snö och längs kusten som snöblandat regn.",
+      "latitude": 62.8307724,
+      "longitude": 17.636301,
+      "category": 0,
+      "subcategory": "Halkvarning"
+    },
+    {
+      "id": 1264248,
+      "priority": 3,
+      "createddate": "\/Date(1418206557270+0100)\/",
+      "title": "Jämtlands län     ",
+      "exactlocation": "",
+      "description": "Risk för snöhalka under dagen.  Även risk för snödrev och snörök i samband med friska till hårda vindar. \n\n",
+      "latitude": 63.4809952,
+      "longitude": 14.326333,
+      "category": 0,
+      "subcategory": "Halkvarning"
+    },
+    {
+      "id": 1256516,
+      "priority": 3,
+      "createddate": "\/Date(1418206574880+0100)\/",
+      "title": "Norrbottens län ",
+      "exactlocation": " ",
+      "description": "Risk för ishalka längs inlandet och kusten. Risk för snöhalka i fjälltrakterna.",
+      "latitude": 66.74946,
+      "longitude": 21.38291,
+      "category": 0,
+      "subcategory": "Halkvarning"
+    },
+    {
+      "id": 1308148,
+      "priority": 3,
+      "createddate": "\/Date(1418207098740+0100)\/",
+      "title": "Nordmaling",
+      "exactlocation": "",
+      "description": "Strömavbrott berör drygt 900 abonnenter.",
+      "latitude": 63.515277719175927,
+      "longitude": 19.65670152588979,
+      "category": 3,
+      "subcategory": "El"
+    },
+    {
+      "id": 1308149,
+      "priority": 4,
+      "createddate": "\/Date(1418207317420+0100)\/",
+      "title": "Helsingborg",
+      "exactlocation": "Bårslövsvägen och Fresiagatan",
+      "description": "Akut vattenläcka har uppstått på Bårslövsvägen, Fresiagatan och kringliggande adresser kan påverkas av läckan. Felsökning pågår. Vattnet beräknas vara tillbaka under eftermiddagen.",
+      "latitude": 56.0618057654657,
+      "longitude": 12.764319244609846,
+      "category": 3,
+      "subcategory": "Vatten"
+    },
+    {
+      "id": 1304204,
+      "priority": 3,
+      "createddate": "\/Date(1418207624490+0100)\/",
+      "title": "Gränna-Visingsö",
+      "exactlocation": "",
+      "description": "Förseningar i färjetrafiken under onsdagen p.g.a. hård vind. Braheborg är tagen ur trafik. Ebba Brahe ersätter, vilket innebär reducerad kapacitet. Gäller t o m den 12/12.",
+      "latitude": 58.034072875976562,
+      "longitude": 14.349037170410156,
+      "category": 1,
+      "subcategory": "Färja"
+    },
+    {
+      "id": 1308166,
+      "priority": 3,
+      "createddate": "\/Date(1418207746370+0100)\/",
+      "title": "Alvesta-Kalmar",
+      "exactlocation": "",
+      "description": "Förseningar uppstår för tågen på sträckan.  Orsaken är ett tåg som står stilla med tekniska problem",
+      "latitude": 56.520182986375225,
+      "longitude": 14.471680622304726,
+      "category": 1,
+      "subcategory": "Tåg"
+    },
+    {
+      "id": 1308166,
+      "priority": 3,
+      "createddate": "\/Date(1418207746370+0100)\/",
+      "title": "Alvesta-Kalmar",
+      "exactlocation": "",
+      "description": "Förseningar uppstår för tågen på sträckan.  Orsaken är ett tåg som står stilla med tekniska problem",
+      "latitude": 56.520182986375225,
+      "longitude": 14.471680622304726,
+      "category": 1,
+      "subcategory": "Tåg"
+    },
+    {
+      "id": 1308138,
+      "priority": 4,
+      "createddate": "\/Date(1418208018607+0100)\/",
+      "title": "Norrköping",
+      "exactlocation": "Hamngatan/Drottninggatan",
+      "description": "På grund av en kollision på Drottninggatan är det just nu stopp för spårvagnstrafiken linje 2 och 3 vid hållplats Rådhuset mot Vidablick och Fridvalla. Bussar är på väg ut för att ersätta. ",
+      "latitude": 58.593199004700104,
+      "longitude": 16.185803368847168,
+      "category": 1,
+      "subcategory": "Spårvagn"
+    },
+    {
+      "id": 1308158,
+      "priority": 3,
+      "createddate": "\/Date(1418208471503+0100)\/",
+      "title": "E14 Trångsviken-Mörsil",
+      "exactlocation": "Strax före Mattmar, mot Åre",
+      "description": "Bilbrand.",
+      "latitude": 63.304002704352627,
+      "longitude": 13.90500048235082,
+      "category": 0,
+      "subcategory": "Trafikolycka"
+    },
+    {
+      "id": 1307859,
+      "priority": 3,
+      "createddate": "\/Date(1418208659370+0100)\/",
+      "title": "Lv 975  Arnöleden, i båda riktningar.",
+      "exactlocation": "",
+      "description": "Tung trafik kan inte åka med färjan på grund av hård vind.",
+      "latitude": 59.499851226806641,
+      "longitude": 17.146011352539063,
+      "category": 1,
+      "subcategory": "Färja"
+    },
+    {
+      "id": 1308169,
+      "priority": 3,
+      "createddate": "\/Date(1418209074977+0100)\/",
+      "title": "E6 vid Klarebergsmotet [82]",
+      "exactlocation": "",
+      "description": "Stillastående personbil med punktering. Norrgående.",
+      "latitude": 57.795864105224609,
+      "longitude": 12.005433082580566,
+      "category": 0,
+      "subcategory": "Trafikstörning"
+    },
+    {
+      "id": 1308176,
+      "priority": 4,
+      "createddate": "\/Date(1418209076337+0100)\/",
+      "title": "Karlskrona kommun",
+      "exactlocation": "Fågelmara, Kristianopel och Torhamn",
+      "description": "Just nu ca 300 hushåll utan ström. Ingen prognos.",
+      "latitude": 56.197521400437381,
+      "longitude": 15.653312490027261,
+      "category": 3,
+      "subcategory": "El"
+    },
+    {
+      "id": 1308177,
+      "priority": 3,
+      "createddate": "\/Date(1418209103787+0100)\/",
+      "title": "Lv 539 tpl Ösmo- Himmelsö ",
+      "exactlocation": "Vid Vreta",
+      "description": "Träd delvis över vägen",
+      "latitude": 58.966545104980469,
+      "longitude": 17.958097457885742,
+      "category": 0,
+      "subcategory": "Trafikstörning"
     }
   ],
   "pagination": {
     "page": 1,
     "size": 5000,
-    "totalhits": 137,
+    "totalhits": 136,
     "totalpages": 1
   }
 }
