@@ -16,8 +16,8 @@ några begränsningar för antal anrop men de föredrar att man ska vara "snäll
 
 **Hur och hur länga cachar du ditt data för att slippa anropa API:erna i onödan?**
 
-- Var 5 minut gör systemet ett anrop och om datan den fått inte är den samma som det i sin cachade data 
-betyder det att det blivit en uppdatering och sparar i json-filen för att sedan presentera datan. Annars väntar systemet 5 minuter till.
+- Var 5 minut gör systemet ett anrop till Sveriges Radio och om datan den fått inte är den samma som den i sin cachade data 
+betyder det att det blivit en uppdatering och sparar över i json-filen för att sedan presentera datan. Annars väntar systemet 5 minuter till.
 
 **Vad finns det för risker med din applikation?**
 
