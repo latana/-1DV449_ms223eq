@@ -34,3 +34,4 @@ Det blir inte vidare snygg på webbplattsen men den exikveras inte i alla fall.
 - Alla Js och css filer har jag minifierat och unglyfierat för att få lite snabbare prestanda. 
 - Jag har gjort så gott jag kan för att inte göra några onödiga förfrågningar.
 - När jag sätter ut lyssnare så ser jag till att det skapas just bara de som krävs. I tidigare testning då jag gjorde en ny förfrågan varje minut så skapas nya lyssnare varje gång det kom ut ny data vilket tog hårt på prestandan efter 5 minuter.
+- Javascripten läses in sist i min html fil.
