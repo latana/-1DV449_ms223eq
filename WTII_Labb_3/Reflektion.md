@@ -27,7 +27,8 @@ betyder det att det blivit en uppdatering och sparar över i json-filen för att
 **Hur har du tänkt kring säkerheten i din applikation?**
 
 - Om elak data skulle komma in från Sveriges Radio så spelar det ingen roll då jag skriver ut med textContent.
-Det blir inte vidare snygg på webbplattsen men den exikveras inte i alla fall.
+Min google infowindow blev det lite krongligare, jag implementerade en funktion som ser till så att scriptet inte exikveras.
+Det blir inte vidare snygg på webbplattsen men systemet är skyddat.
 
 **Hur har du tänkt kring optimeringen i din applikation?**
 
