@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="markerBox.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="markerBox.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/js/markerBox.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37859008" vertical-offset="348" max-vertical-offset="782">
-              <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+            <state vertical-scroll-proportion="-4.214286" vertical-offset="392" max-vertical-offset="782">
+              <caret line="32" column="18" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="18" />
               <folding>
                 <element signature="n#!!doc;n#createInfoString#0" expanded="false" />
               </folding>
@@ -49,18 +49,20 @@
       <file leaf-file-name="trafikFile.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trafikFile.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.574074" vertical-offset="32654" max-vertical-offset="33116">
-              <caret line="1929" column="34" selection-start-line="1929" selection-start-column="34" selection-end-line="1929" selection-end-column="34" />
-              <folding />
+            <state vertical-scroll-proportion="-2.574074" vertical-offset="27758" max-vertical-offset="28220">
+              <caret line="1641" column="34" selection-start-line="1641" selection-start-column="34" selection-end-line="1641" selection-end-column="34" />
+              <folding>
+                <marker date="1418206020805" expanded="true" signature="86:16348" placeholder="[...]" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="206" max-vertical-offset="833">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.3837535" vertical-offset="441" max-vertical-offset="816">
+              <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -70,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/app/js/googlemap.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="3162">
-              <caret line="101" column="28" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
+              <caret line="101" column="59" selection-start-line="101" selection-start-column="59" selection-end-line="101" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -88,7 +90,6 @@
         <option value="$PROJECT_DIR$/app/view/index.html" />
         <option value="$PROJECT_DIR$/app/app.js" />
         <option value="$PROJECT_DIR$/app/js/svRadio.js" />
-        <option value="$PROJECT_DIR$/app/index.html" />
         <option value="$PROJECT_DIR$/app/js/googlemap.js" />
         <option value="$PROJECT_DIR$/app/js/googlemap.min.js" />
         <option value="$PROJECT_DIR$/app/css/style.css" />
@@ -98,6 +99,7 @@
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/app/js/markerBox.js" />
         <option value="$PROJECT_DIR$/app/js/markerBox.min.js" />
+        <option value="$PROJECT_DIR$/app/index.html" />
       </list>
     </option>
   </component>
@@ -367,7 +369,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="24068" max-vertical-offset="24548">
           <caret line="1420" column="9" selection-start-line="1420" selection-start-column="9" selection-end-line="1420" selection-end-column="9" />
-          <folding />
+          <folding>
+            <marker date="1418206020805" expanded="true" signature="86:16348" placeholder="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -399,7 +403,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="25292" max-vertical-offset="25772">
           <caret line="1492" column="9" selection-start-line="1492" selection-start-column="9" selection-end-line="1492" selection-end-column="9" />
-          <folding />
+          <folding>
+            <marker date="1418206020805" expanded="true" signature="86:16348" placeholder="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -448,7 +454,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="22980" max-vertical-offset="23324">
           <caret line="1366" column="1" selection-start-line="1366" selection-start-column="1" selection-end-line="1366" selection-end-column="1" />
-          <folding />
+          <folding>
+            <marker date="1418206020805" expanded="true" signature="86:16348" placeholder="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -640,14 +648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="206" max-vertical-offset="833">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.044386424" vertical-offset="17" max-vertical-offset="901">
@@ -680,9 +680,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/trafikFile.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.574074" vertical-offset="32654" max-vertical-offset="33116">
-          <caret line="1929" column="34" selection-start-line="1929" selection-start-column="34" selection-end-line="1929" selection-end-column="34" />
-          <folding />
+        <state vertical-scroll-proportion="-2.574074" vertical-offset="27758" max-vertical-offset="28220">
+          <caret line="1641" column="34" selection-start-line="1641" selection-start-column="34" selection-end-line="1641" selection-end-column="34" />
+          <folding>
+            <marker date="1418206020805" expanded="true" signature="86:16348" placeholder="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -690,14 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1058" max-vertical-offset="1513">
           <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/googlemap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="3162">
-          <caret line="101" column="28" selection-start-line="101" selection-start-column="28" selection-end-line="101" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -712,11 +706,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/js/markerBox.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37859008" vertical-offset="348" max-vertical-offset="782">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+        <state vertical-scroll-proportion="-4.214286" vertical-offset="392" max-vertical-offset="782">
+          <caret line="32" column="18" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc;n#createInfoString#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/googlemap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="3162">
+          <caret line="101" column="59" selection-start-line="101" selection-start-column="59" selection-end-line="101" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3837535" vertical-offset="441" max-vertical-offset="816">
+          <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
