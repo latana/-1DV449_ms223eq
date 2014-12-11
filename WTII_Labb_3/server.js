@@ -46,7 +46,7 @@ var update = function(){
 
     request(url, function (err, resp, data){
 
-        if(err !== true && resp.statusCode== 200){
+        if(err !== true && resp.statusCode== 200 && resp.statusCode == undefined){
 
             var jsonData = JSON.parse(data);
             if(JSON.stringify(jsonData) !== JSON.stringify(parse)) {
