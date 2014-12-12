@@ -7,7 +7,10 @@ på ett spel ska man kunna filtrera på genre och även bygga en top 10 lista f�
 Tänkta apier:
 
 1. [ign](http://se.ign.com/)
-2. [giantbomb](http://www.giantbomb.com/)
-3. [imdb](http://www.imdb.com/) (Osäker)
+2. ~~giantbomb~~
+3. [metacritic](http://www.metacritic.com/)
+4. [imdb](http://www.imdb.com/) (Osäker)
+
+Giantbomb beslutade jag att inte använda då jag inte kunde jobba runt problemen med deras api. 
 
 Jag är så klart osäker på om jag ska använda mig ut av imdb då de bara har spel med röstskådespelare i. Annars är deras api riktigt trevligt.
