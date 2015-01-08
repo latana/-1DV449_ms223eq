@@ -5,15 +5,28 @@
     <title></title>
 </head>
 <body>
-<p>I'm a body</p>
-<form method="post">
-    <input type="text" name="search">
+<form id='form' method="post">
+    <input type="text" id="searchField" name="search">
     <input type="submit" id='search' value="Submit">
 </form>
+
+<div id="status"></div>
+<div id="fb-root" class=" fb_reset"></div>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+<button id="logout" onlogin="checkLoginState();">Logout</button>
+<div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+</div>
+
+<div id="top-5">
+
+
+
+</div>
 
 <div id='result'></div>
 
 </body>
+<script src="js/ouath.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/renderMashup.js"></script>
 </html>
