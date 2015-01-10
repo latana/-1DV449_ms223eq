@@ -4,50 +4,37 @@
 
 var socket = io.connect('http://localhost:8000');
 
+var onlyOneGif;
+
 socket.on('render', function (data) {
+console.log(data);
+    var resultDiv = document.getElementById('result');
+
+    while (resultDiv.firstChild) {
+        resultDiv.removeChild(resultDiv.firstChild);
+    }
 
     if(data !== null) {
 
-        var resultDiv = document.getElementById('result');
-        var div = document.createElement('div');
-
         if(typeof data === "string"){
 
+            var div = document.createElement('div');
             var domMessage = document.createElement('p');
             domMessage.textContent = data;
             div.appendChild(domMessage);
             resultDiv.appendChild(div);
         }
-        else {
+        else{
 
-            var domTitle = document.createElement('p');
-            var domReleased = document.createElement('p');
-            var domScore = document.createElement('p');
-            var domDesc = document.createElement('p');
-            var domPublisher = document.createElement('p');
-            var domDeveloper = document.createElement('p');
-            var domPics = document.createElement('img');
-            var domPlatform = document.createElement('p');
+            if(typeof data.title === "string"){
 
-            domTitle.textContent = "Title: " + data.title;
-            domReleased.textContent = "Released: " + data.released;
-            domScore.textContent = "Score: " + data.score.toFixed(1);
-            domDesc.textContent = "Description: " + data.description;
-            domPublisher.textContent = "Publisher: " + data.publisher;
-            domPics.setAttribute('src', data.pic);
-            domPics.setAttribute('alt', 'na');
-
-            domPlatform.textContent = "Platform: " + data.platform;
-
-            div.appendChild(domPics);
-            div.appendChild(domTitle);
-            div.appendChild(domReleased);
-            div.appendChild(domScore);
-            div.appendChild(domDesc);
-            div.appendChild(domPublisher);
-            div.appendChild(domPlatform);
-            resultDiv.appendChild(div);
-
+                addResult(data);
+            }
+            else{
+                for(var i = 0; i < data.length; i++) {
+                    addResult(data[i]);
+                }
+            }
         }
 
         var domForm = document.getElementById('form');
@@ -58,7 +45,65 @@ socket.on('render', function (data) {
     }
 });
 
+function addResult(data){
+
+    var resultDiv = document.getElementById('result');
+    var div = document.createElement('div');
+    div.setAttribute("id", "resultDiv");
+
+    var domTitle = document.createElement('p');
+    domTitle.setAttribute("id", "domTitle");
+    var domReleased = document.createElement('p');
+    domReleased.setAttribute("id", "domReleased");
+    var domScore = document.createElement('p');
+    domScore.setAttribute("id", "domScore");
+    var domDesc = document.createElement('p');
+    domDesc.setAttribute("id", "domDesc");
+    var domPublisher = document.createElement('p');
+    domPublisher.setAttribute("id", "domPublisher");
+    var domPlatform = document.createElement('p');
+    domPlatform.setAttribute("id", "domPlatform");
+
+    domTitle.textContent = "Title: " + titleHandler(data.title);
+    domReleased.textContent = "Released: " + data.released;
+
+    if(typeof data.score === "number"){
+        domScore.textContent = "Score: " + data.score.toFixed(1);
+    }
+    else{
+        domScore.textContent = "Score: " + data.score;
+    }
+
+    domDesc.textContent = "Description: " + data.description;
+    domPublisher.textContent = "Publisher: " + data.publisher;
+
+    var domPics = document.createElement('img');
+    domPics.setAttribute("id", "domPics");
+
+    if(data.pic === "") {
+        domPics.setAttribute('src', "../img/noImg.png");
+        domPics.setAttribute('alt', 'na');
+    }
+    else{
+        domPics.setAttribute('src', data.pic);
+        domPics.setAttribute('alt', 'na');
+    }
+
+    domPlatform.textContent = "Platform: " + data.platform;
+
+    div.appendChild(domPics);
+    div.appendChild(domTitle);
+    div.appendChild(domReleased);
+    div.appendChild(domScore);
+    div.appendChild(domDesc);
+    div.appendChild(domPublisher);
+    div.appendChild(domPlatform);
+    resultDiv.appendChild(div);
+}
+
 function createTopFive() {
+
+    socket.emit("top-Five");
     socket.on('top-Five', function (data) {
 
         if(data.length !== 0){
@@ -68,21 +113,25 @@ function createTopFive() {
             var top5Div = document.getElementById('top-5');
             top5Div.appendChild(h3);
 
-            for(i = 0; i < data.length; i++){
+            data.sort(function(obj1, obj2) {
+                return obj2['score'] - obj1['score'];
+            });
+
+            for(var i = 0; i < data.length; i++){
 
                 var div = document.createElement('div');
                 var liTitle = document.createElement('p');
                 var liScore = document.createElement('p');
-                liTitle.textContent = data[i].title;
-                liScore.textContent = data[i].score.toFixed(1);
+                liTitle.textContent = i +  1 + ". " + titleHandler(data[i].title);
+                liScore.textContent = data[i]['score'].toFixed(1);
                 div.appendChild(liTitle);
                 div.appendChild(liScore);
                 top5Div.appendChild(div);
             }
         }
-
     });
 }
+
 window.onload = function () {
 
     document.getElementById("search").onclick = function (e) {
@@ -103,8 +152,6 @@ window.onload = function () {
     }
 };
 
-var onlyOneGif;
-
 function createLoadingGif() {
 
     if (!onlyOneGif) {
@@ -117,6 +164,21 @@ function createLoadingGif() {
         var domForm = document.getElementById('form');
         domForm.appendChild(loader);
     }
+}
+
+function titleHandler(string){
+
+    var title = string.split(" ");
+    var tempTitle = "";
+    var fullTitle = "";
+
+    for (i in title) {
+
+        tempTitle = title[i];
+        fullTitle += tempTitle.substring(0,1).toUpperCase() + tempTitle.substring(1,tempTitle.length) + " ";
+    }
+
+    return fullTitle;
 }
 
 createTopFive();
