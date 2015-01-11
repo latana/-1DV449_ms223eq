@@ -1,30 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html manifest="../manifest.appcache">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GameScore</title>
 </head>
 <body>
-<form id='form' method="post">
-    <input type="text" id="searchField" name="search">
-    <input type="submit" id='search' value="Submit">
-</form>
+<div class="container-fluid col-md-20">
 
-<div id="status"></div>
-<div id="fb-root" class=" fb_reset"></div>
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-<button id="logout" onlogin="checkLoginState();">Logout</button>
-<div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+    <div class="col-md-20 pull-right">
+        <div id="fb-root" class=" fb_reset"></div>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+        <div id="status"></div>
+    </div>
+
+    <h1 class="col-md-20 text-left">GameScore</h1>
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="input-group pull-left">
+                <div id = "gif" class="col-md-1 pull-right"></div>
+                    <input type="text" id="searchField" class="form-control col-md-1"
+                                                    placeholder="Search for game..."name="search">
+                    <span class="input-group-btn">
+                        <input type="submit" id='search' class="btn btn-default"  value="Go!">
+                    </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="top-5" class="col-md-2 pull-right"></div>
+    <div id='result' class="col-md-10 pull-left"></div>
+
 </div>
-
-<div id="top-5">
-
-
-
-</div>
-
-<div id='result'></div>
-
 </body>
 <script src="js/ouath.js"></script>
 <script src="/socket.io/socket.io.js"></script>

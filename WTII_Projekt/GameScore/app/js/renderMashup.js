@@ -7,7 +7,7 @@ var socket = io.connect('http://localhost:8000');
 var onlyOneGif;
 
 socket.on('render', function (data) {
-console.log(data);
+
     var resultDiv = document.getElementById('result');
 
     while (resultDiv.firstChild) {
@@ -20,6 +20,8 @@ console.log(data);
 
             var div = document.createElement('div');
             var domMessage = document.createElement('p');
+            domMessage.setAttribute("class", "text-danger");
+
             domMessage.textContent = data;
             div.appendChild(domMessage);
             resultDiv.appendChild(div);
@@ -37,7 +39,7 @@ console.log(data);
             }
         }
 
-        var domForm = document.getElementById('form');
+        var domForm = document.getElementById('gif');
         var loader = document.getElementById('loader');
         domForm.removeChild(loader);
 
@@ -58,11 +60,13 @@ function addResult(data){
     var domScore = document.createElement('p');
     domScore.setAttribute("id", "domScore");
     var domDesc = document.createElement('p');
-    domDesc.setAttribute("id", "domDesc");
+    domDesc.setAttribute("class", "domDesc");
     var domPublisher = document.createElement('p');
     domPublisher.setAttribute("id", "domPublisher");
     var domPlatform = document.createElement('p');
     domPlatform.setAttribute("id", "domPlatform");
+    var domLastUpdate = document.createElement('p');
+    domLastUpdate.setAttribute("id", "domLastUpdate");
 
     domTitle.textContent = "Title: " + titleHandler(data.title);
     domReleased.textContent = "Released: " + data.released;
@@ -90,14 +94,16 @@ function addResult(data){
     }
 
     domPlatform.textContent = "Platform: " + data.platform;
+    domLastUpdate.textContent = "Last Updated: " + data.lastUpdate;
 
     div.appendChild(domPics);
     div.appendChild(domTitle);
     div.appendChild(domReleased);
     div.appendChild(domScore);
-    div.appendChild(domDesc);
     div.appendChild(domPublisher);
     div.appendChild(domPlatform);
+    div.appendChild(domDesc);
+    div.appendChild(domLastUpdate);
     resultDiv.appendChild(div);
 }
 
@@ -141,6 +147,7 @@ window.onload = function () {
         if(searchValue == "") {
             var resultDiv = document.getElementById('result');
             var domMessage = document.createElement('p');
+            domMessage.setAttribute("class", "text-danger");
             domMessage.textContent = "The field is empty";
             resultDiv.appendChild(domMessage);
         }
@@ -161,7 +168,7 @@ function createLoadingGif() {
         var loader = document.createElement("img");
         loader.setAttribute("src", "img/loader.gif");
         loader.setAttribute("id", "loader");
-        var domForm = document.getElementById('form');
+        var domForm = document.getElementById('gif');
         domForm.appendChild(loader);
     }
 }

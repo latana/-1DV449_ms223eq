@@ -1,0 +1,14 @@
+CACHE MANIFEST
+/app/index.html
+/app/js/renderMashup.js
+/app/css/bootstrap.min.css
+/app/css/style.css
+/app/img/loader.gif
+/app/img/noImg.png
+/server.js
+
+NETWORK:
+/app/js/ouath.js
+
+FALLBACK:
+/html/ /app/views/offline.html

@@ -45,8 +45,8 @@ var server = app.listen(port, ipaddr, function () {
 
 
 var io = require('socket.io').listen(server);
-var gameTest = "gameTest5";
-var topFive = "topFiveTest1";
+var gameTest = "gameTest6";
+var topFive = "topFiveTest2";
 
 io.on("connection", function(socket){
 
@@ -69,7 +69,7 @@ io.on("connection", function(socket){
      */
     socket.on('search', function (data) {
 
-        var search = data.search;
+        var search = data.search.toLowerCase();
 
         var collection = db.get(gameTest);
 
@@ -123,35 +123,35 @@ function getIgn(search, socketToSendTo) {
 
             if(result.body.length === 0){
 
-                var message = "The game could not be found";
-                socketToSendTo.emit('render', message);
+                findInDataBase(search, socketToSendTo)
             }
             else{
-                getOmdb(result.body, socketToSendTo);
+                getOmdb(search, result.body, socketToSendTo);
             }
     });
 }
 
 /**
  *
+ * @param search string
  * @param ignArray Array
  * @param socketToSendTo Object
  *
  * Gör ett anrop mot imdb's api och kallar på mashup när den är klar
  */
 
-function getOmdb(ignArray, socketToSendTo) {
+function getOmdb(search, ignArray, socketToSendTo) {
 
     var omdbArray = [];
     var count = 0;
 
     for(var i = 0; i < ignArray.length; i++){
 
-        var search = ignArray[i].title;
+        var ignSearch = ignArray[i].title;
 
-        search = search.replace(/ /g, '+');
+        ignSearch = ignSearch.replace(/ /g, '+');
 
-        unirest.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=full&r=json")
+        unirest.get("http://www.omdbapi.com/?t=" + ignSearch + "&y=&plot=full&r=json")
             .end(function (result) {
 
                 count ++;
@@ -166,8 +166,7 @@ function getOmdb(ignArray, socketToSendTo) {
 
                     if(omdbArray.length === 0){
 
-                        var message = "omdb fail";
-                        socketToSendTo.emit('render', message);
+                        findInDataBase(search, socketToSendTo);
                     }
                     else{
                         mashup(ignArray, omdbArray, socketToSendTo);
@@ -218,11 +217,10 @@ function storeInDataBase(hybridArray) {
                     count++;
 
                     if (oldObj.title === newObj.title) {
-                        if (Number(oldObj.timestamp) < Number(dateNow)) {
 
                             tempArray.push(newObj);
                             deleteArray.push(oldObj);
-                        }
+
                         return false; //Break every-loop
                     }
                     if (count === data.length) {
@@ -275,6 +273,20 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
 
     var hybridArray = [];
 
+    var getTime = new Date();
+    var year = getTime.getFullYear();
+    var month = getTime.getMonth() + 1;
+    var day = getTime.getDate();
+    var hour = getTime.getHours();
+    var min = getTime.getMinutes();
+
+    month = lessThenTen(month);
+    day = lessThenTen(day);
+    hour = lessThenTen(hour);
+    min = lessThenTen(min);
+
+    var lastUpdate = year +"-"+ month + "-" + day + " " + hour + ":" + min;
+
     ignArray.forEach(function(ignObject){
         omdbArray.every(function (omdbObject) {
             if(ignObject.title === omdbObject.Title){
@@ -310,6 +322,7 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
 
                 var timeStamp = Number(date.getTime() + 300000);
                 hybrid['timestamp'] = timeStamp;
+                hybrid['lastUpdate'] = lastUpdate;
 
                 hybridArray.push(hybrid);
 
@@ -319,9 +332,15 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
         });
     });
 
-    storeInDataBase(hybridArray);
-    checkTopFive(hybridArray);
-    socketToSendTo.emit('render', hybridArray);
+    if(hybridArray.length === 0){
+        var message = "Could not find a match";
+        socketToSendTo.emit('render', message);
+    }
+    else {
+        storeInDataBase(hybridArray);
+        checkTopFive(hybridArray);
+        socketToSendTo.emit('render', hybridArray);
+    }
 }
 
 function checkTopFive(hybridArray){
@@ -442,6 +461,30 @@ function checkValue(string){
         string = "No information";
     }
     return string;
+}
+
+function findInDataBase(search, socketToSendTo){
+
+    var query = { title: new RegExp('^' + search) };
+    var collection = db.get(gameTest);
+    collection.find(query,function(err, data) {
+
+        if(data.length === 0){
+            var message = "The game could not be found";
+            socketToSendTo.emit('render', message);
+        }
+        else{
+            socketToSendTo.emit('render', data);
+        }
+    });
+}
+
+function lessThenTen(int){
+
+    if(int < 10){
+        int = '0' + int;
+    }
+    return int;
 }
 
 app.use(function(req, res) {
