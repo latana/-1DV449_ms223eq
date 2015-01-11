@@ -27,4 +27,4 @@ När användaren först navigerar till webplattsen frågar klienten om data för
 
 **Risker med din applikation:** En stor risk som när man alltid jobbar med apier är ifall något av apierna går ner. Jag ser apierna som en databas och ifall något av dem går ner finns det inte mycket jag kan göra för att min mashup ska bestå. Men om nu olyckan är framme så går jag mot mongo databasen. Användaren kan själv se hur fräsh datan är nederst på varje spel.
 Rent etniskt skulle jag vilja säga att jag är i gråzonen. Ja jag sparar ner data men den är modifierad och inte rå data. Oavsett så har ingen av apierna hävdat att jag inte får spara ner deras data.
-==================================================
+
