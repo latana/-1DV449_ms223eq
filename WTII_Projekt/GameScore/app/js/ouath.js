@@ -84,9 +84,9 @@ function testAPI() {
     });
 }
 
-logout.onclick = function logout() {
+/**logout.onclick = function logout() {
     FB.logout(function (response) {
         // Person is now logged out
     });
     document.getElementById("status").innerHTML = "You have logged out from facebook";
-}
+} **/

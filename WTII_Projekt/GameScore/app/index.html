@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="../manifest.appcache">
+<html>
 <head lang="en">
     <meta charset="UTF-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -10,31 +10,36 @@
 <body>
 <div class="container-fluid col-md-20">
 
-    <div class="col-md-20 pull-right">
+    <div class="col-md-20">
         <div id="fb-root" class=" fb_reset"></div>
         <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
         <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
         <div id="status"></div>
     </div>
 
-    <h1 class="col-md-20 text-left">GameScore</h1>
+    <h1 class="col-md-20 text-center">GameScore</h1>
+    <div id="offline"></div>
 
-    <div class="row">
+    <div class="row text-center">
         <div class="col-lg-7">
-            <div class="input-group pull-left">
-                <div id = "gif" class="col-md-1 pull-right"></div>
+            <div id="imaginary_container">
+                <form id='form' method="post">
+                <div class="input-group stylish-input-group">
                     <input type="text" id="searchField" class="form-control col-md-1"
-                                                    placeholder="Search for game..."name="search">
+                                                placeholder="Search for game..."name="search">
                     <span class="input-group-btn">
                         <input type="submit" id='search' class="btn btn-default"  value="Go!">
                     </span>
+                </div>
+                </form>
             </div>
-
         </div>
+        <div id = "gif" class="col-md-1"></div>
     </div>
 
-    <div id="top-5" class="col-md-2 pull-right"></div>
-    <div id='result' class="col-md-10 pull-left"></div>
+    <div id="top-5" class="col-md-5"></div>
+
+    <div id='result' class="col-md-10"></div>
 
 </div>
 </body>

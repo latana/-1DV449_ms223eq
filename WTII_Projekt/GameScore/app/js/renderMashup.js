@@ -3,37 +3,32 @@
  */
 
 var socket = io.connect('http://localhost:8000');
-
 var onlyOneGif;
 
+/**
+ * Renderar ut datan om den finns.
+ * Annars renderar ett meddelande
+ */
 socket.on('render', function (data) {
 
     var resultDiv = document.getElementById('result');
 
-    while (resultDiv.firstChild) {
-        resultDiv.removeChild(resultDiv.firstChild);
-    }
+    deleteDiv();
 
     if(data !== null) {
 
         if(typeof data === "string"){
 
-            var div = document.createElement('div');
-            var domMessage = document.createElement('p');
-            domMessage.setAttribute("class", "text-danger");
-
-            domMessage.textContent = data;
-            div.appendChild(domMessage);
-            resultDiv.appendChild(div);
+            message(data, resultDiv);
         }
         else{
-
             if(typeof data.title === "string"){
 
                 addResult(data);
             }
             else{
                 for(var i = 0; i < data.length; i++) {
+
                     addResult(data[i]);
                 }
             }
@@ -47,6 +42,11 @@ socket.on('render', function (data) {
     }
 });
 
+/**
+ *
+ * @param data objekt
+ * Renderar ut objektet
+ */
 function addResult(data){
 
     var resultDiv = document.getElementById('result');
@@ -94,7 +94,7 @@ function addResult(data){
     }
 
     domPlatform.textContent = "Platform: " + data.platform;
-    domLastUpdate.textContent = "Last Updated: " + data.lastUpdate;
+    domLastUpdate.textContent = "Last Update: " + data.lastUpdate;
 
     div.appendChild(domPics);
     div.appendChild(domTitle);
@@ -107,6 +107,9 @@ function addResult(data){
     resultDiv.appendChild(div);
 }
 
+/**
+ * Frågar serversidan om top 5 listan. och skriver ut datan om det finns någon data.
+ */
 function createTopFive() {
 
     socket.emit("top-Five");
@@ -118,6 +121,18 @@ function createTopFive() {
             h3.textContent = "Top 5 list";
             var top5Div = document.getElementById('top-5');
             top5Div.appendChild(h3);
+            var table = document.createElement("table");
+            table.setAttribute('class', 'table table-striped');
+            var tr = document.createElement('tr');
+            var th1 = document.createElement('th');
+            var th2 = document.createElement('th');
+            th1.textContent = "Title";
+            th2.textContent = "Score";
+            tr.appendChild(th1);
+            tr.appendChild(th2);
+            table.appendChild(tr);
+            top5Div.appendChild(table);
+
 
             data.sort(function(obj1, obj2) {
                 return obj2['score'] - obj1['score'];
@@ -125,40 +140,86 @@ function createTopFive() {
 
             for(var i = 0; i < data.length; i++){
 
-                var div = document.createElement('div');
-                var liTitle = document.createElement('p');
-                var liScore = document.createElement('p');
+                var div = document.createElement('tr');
+                var liTitle = document.createElement('td');
+                var liScore = document.createElement('td');
                 liTitle.textContent = i +  1 + ". " + titleHandler(data[i].title);
                 liScore.textContent = data[i]['score'].toFixed(1);
                 div.appendChild(liTitle);
                 div.appendChild(liScore);
-                top5Div.appendChild(div);
+                table.appendChild(div);
             }
         }
     });
 }
 
+/**
+ * Skickar det användaren matat in till serversidan.
+ */
 window.onload = function () {
 
     document.getElementById("search").onclick = function (e) {
+        e.preventDefault();
 
         var searchValue = document.getElementById("searchField").value;
 
-        if(searchValue == "") {
+        if(searchValue === "") {
+
             var resultDiv = document.getElementById('result');
+
+            deleteDiv();
+
             var domMessage = document.createElement('p');
             domMessage.setAttribute("class", "text-danger");
             domMessage.textContent = "The field is empty";
             resultDiv.appendChild(domMessage);
         }
         else{
-            socket.emit("search", {search: searchValue});
-            createLoadingGif();
+
+            if(navigator.onLine){
+
+                createLoadingGif();
+                socket.emit("search", {search: searchValue});
+            }
+            else {
+                deleteDiv();
+
+                var storage = localStorage.getItem("localList");
+
+                if(storage !== null) {
+
+                    storage = JSON.parse(storage);
+                    var count = 0;
+
+                    for(var i = 0; i < storage.length; i++) {
+
+                        count ++;
+                        if (storage[i].title === searchValue) {
+
+                            createLoadingGif();
+                            addResult(storage[i]);
+                            break;
+                        }
+                        if (count === storage.length){
+                            var div = document.getElementById("result");
+                            var notFound = "The game could not be found in offline mode";
+                            message(notFound, div);
+                        }
+                    }
+                }
+                else{
+                    var offlinediv = document.getElementById("result");
+                    var offlineMessage = "There is no data in offline mode";
+                    message(offlineMessage, offlinediv);
+                }
+            }
         }
-        e.preventDefault();
     }
 };
 
+/**
+ * skapar en laddnings gif men bara ifall den inte redan finns framme.
+ */
 function createLoadingGif() {
 
     if (!onlyOneGif) {
@@ -173,6 +234,11 @@ function createLoadingGif() {
     }
 }
 
+/**
+ * @param string string
+ * @returns string fullTitle
+ * Ser till att titlen får stor bokstav
+ */
 function titleHandler(string){
 
     var title = string.split(" ");
@@ -184,8 +250,49 @@ function titleHandler(string){
         tempTitle = title[i];
         fullTitle += tempTitle.substring(0,1).toUpperCase() + tempTitle.substring(1,tempTitle.length) + " ";
     }
-
     return fullTitle;
 }
 
+function message(data, resultDiv){
+
+    var div = document.createElement('div');
+    var domMessage = document.createElement('p');
+    domMessage.setAttribute("class", "text-danger");
+
+    domMessage.textContent = data;
+    div.appendChild(domMessage);
+    resultDiv.appendChild(div);
+}
+
+function deleteDiv(){
+
+    var resultDiv = document.getElementById('result');
+
+    while (resultDiv.firstChild) {
+        resultDiv.removeChild(resultDiv.firstChild);
+    }
+}
+
+function storeLocal(){
+
+    socket.emit("localStore");
+    socket.on('localStore', function (data) {
+
+        localStorage.setItem("localList", JSON.stringify(data));
+    });
+}
+
+function offlineNotify(){
+
+    if(!navigator.onLine){
+
+        var offlineDiv = document.getElementById('offline');
+        var offlinetext = document.createElement('h4');
+        offlinetext.textContent = "Offline Mode"
+        offlineDiv.appendChild(offlinetext);
+    }
+}
+
+offlineNotify();
+storeLocal();
 createTopFive();

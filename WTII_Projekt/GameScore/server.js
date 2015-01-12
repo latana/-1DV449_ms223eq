@@ -48,7 +48,32 @@ var io = require('socket.io').listen(server);
 var gameTest = "gameTest6";
 var topFive = "topFiveTest2";
 
+/**
+ *  Startar när användaren anländer till webbplatsen.
+ *  Kontrollerar om det finns någon data i top 5 listan och sänder ut det till klienten
+ */
 io.on("connection", function(socket){
+
+    socket.on('localStore', function(){
+
+        var collection = db.get(gameTest);
+
+        collection.find({}, function (err, data) {
+
+            if(data.length !== 0) {
+
+                data.forEach(function (element) {
+                    delete element._id;
+                });
+                socket.emit('localStore', data);
+            }
+            else{
+
+                data = null;
+                socket.emit('localStore', data);
+            }
+        });
+    });
 
     socket.on('top-Five', function(){
 
@@ -112,9 +137,8 @@ io.on("connection", function(socket){
  *
  * @param search string
  * @param socketToSendTo object
- * Gör ett anrop mot Ign's api och kallar på MetaCritic när den är klar
+ * Gör ett anrop mot ign och om det inte blir något resultat kontrollerar systemet i databasen igen.
  */
-
 function getIgn(search, socketToSendTo) {
 
     unirest.get("https://videogamesrating.p.mashape.com/get.php?count=20&game='" + search + "'")
@@ -133,13 +157,13 @@ function getIgn(search, socketToSendTo) {
 
 /**
  *
- * @param search string
+ * @param search String
  * @param ignArray Array
  * @param socketToSendTo Object
  *
- * Gör ett anrop mot imdb's api och kallar på mashup när den är klar
+ * Gör ett anrop mot omdb's api och kallar på mashup när den är klar
+ * Om den inte hittar något kollar systemet i databasen igen.
  */
-
 function getOmdb(search, ignArray, socketToSendTo) {
 
     var omdbArray = [];
@@ -176,14 +200,10 @@ function getOmdb(search, ignArray, socketToSendTo) {
     }
 
 }
-app.get('/userlist', function (req, res) {
-
-});
 
 /**
  *
  * @param hybridArray array
- *
  * Sparar ner mashapen i en databas och sätter en timestamp på 5 min
  */
 
@@ -196,8 +216,6 @@ function storeInDataBase(hybridArray) {
         var count = 0;
         var tempArray = [];
         var deleteArray = [];
-        var date = new Date();
-        var dateNow = date.getTime();
 
         if(data.length === 0){
 
@@ -239,36 +257,26 @@ function storeInDataBase(hybridArray) {
             });
 
             tempArray.forEach(function (element) {
-                collection.insert(element);
+                collection.insert(element, function (err,doc) {
+
+                    if (err) {
+                        console.log("There was a problem adding the information to the database.");
+                    }
+                });
             });
         }
-
-   /**     collection.insert(data, function (err, doc) {
-            if (err) {
-                // If it failed, return error
-                console.log(err);
-                console.log("There was a problem adding the information to the database.");
-            }
-            else {
-                // If it worked, set the header so the address bar doesn't still say /adduser
-                console.log('success');
-                // And forward to success page
-            }
-        }); **/
     });
-
 }
 
 /**
  *
  * @param ignArray array
- * @param omdbArray jsonObject
- * @param socketToSendTo object
+ * @param omdbArray Array
+ * @param socketToSendTo Object
  *
  * Lägger ihop de delar jag vill behålla och sätter ihopa poängen för att få ut snittet.
  * Kallar på storeInDataBase och skickar sedan data till klienten.
  */
-
 function mashup(ignArray, omdbArray, socketToSendTo) {
 
     var hybridArray = [];
@@ -343,6 +351,11 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
     }
 }
 
+/**
+ * @param hybridArray Array
+ * Kollar upp top 5 listan och lägger till resultat ifall listan är mindre än 5.
+ * Om listan är full så kontrollerar den ifall poängen är högre.
+ */
 function checkTopFive(hybridArray){
 
     var collection = db.get(topFive);
@@ -355,11 +368,18 @@ function checkTopFive(hybridArray){
 
             hybridArray.forEach(function (newObj) {
 
-                data.push(newObj);
+                if(newObj.score !== "No information") {
+                    data.push(newObj);
+                }
             });
 
             data.forEach(function (element) {
-                collection.insert(element);
+                collection.insert(element, function(err,doc){
+
+                    if(err){
+                        console.log("There was a problem adding the information to the database.");
+                    }
+                });
             });
         }
         else if (data.length < 5) {
@@ -376,13 +396,10 @@ function checkTopFive(hybridArray){
                         return false; //Break every-loop
                     }
 
-                    if(count === data.length) {
-
+                    if(count === data.length && newObj.score !== "No information") {
                         tempArray.push(newObj);
-
                         return false; //Break every-loop
                     }
-
                     return true; //Continue every-loop
                 });
                 count = 0;
@@ -394,7 +411,12 @@ function checkTopFive(hybridArray){
 
             data.forEach(function (element) {
                 delete element._id;
-                collection.insert(element);
+                collection.insert(element, function(err,doc){
+
+                    if(err){
+                        console.log("There was a problem adding the information to the database.");
+                    }
+                });
             });
         }
         else{
@@ -406,29 +428,35 @@ function checkTopFive(hybridArray){
                     if(oldObj.title === newObj.title) {
                         return false; //Break every-loop
                     }
-
-                    if (Number(newObj.score) > Number(oldObj.score)) {
+                    if (Number(newObj.score) > Number(oldObj.score && newObj.score !== "No information")) {
                         tempArray.push(newObj);
-
                         return false; //Break every-loop
                     }
                     return true; //Continue every-loop
                 });
             });
-
             pushData(data, tempArray);
-
             data = spliceData(sortData(data));
             collection.remove();
 
             data.forEach(function (element) {
                 delete element._id;
-                collection.insert(element);
+                collection.insert(element, function(err,doc){
+
+                    if(err){
+                        console.log("There was a problem adding the information to the database.");
+                    }
+                });
             });
         }
     });
 }
 
+/**
+ *
+ * @param data Array
+ * @returns Array
+ */
 function sortData(data){
 
     data.sort(function(obj1, obj2) {
@@ -437,6 +465,11 @@ function sortData(data){
     return data;
 }
 
+/**
+ *
+ * @param data
+ * @returns Array
+ */
 function spliceData(data){
 
     data = data.slice(0, 5);
@@ -444,6 +477,12 @@ function spliceData(data){
     return data;
 }
 
+/**
+ *
+ * @param data Array
+ * @param tempArray Array
+ * @returns Array
+ */
 function pushData(data, tempArray){
 
     for(var i = 0; i < tempArray.length; i++){
@@ -454,6 +493,11 @@ function pushData(data, tempArray){
     return data;
 }
 
+/**
+ *
+ * @param string string
+ * @returns string
+ */
 function checkValue(string){
 
     if(string === "N/A" || string === ""){
@@ -463,6 +507,14 @@ function checkValue(string){
     return string;
 }
 
+/**
+ *
+ * @param search string
+ * @param socketToSendTo Object
+ *
+ * Letar upp om datan finns i databasen och sänder datan till klienten.
+ * Annars skickas ett meddelande.
+ */
 function findInDataBase(search, socketToSendTo){
 
     var query = { title: new RegExp('^' + search) };
@@ -479,6 +531,13 @@ function findInDataBase(search, socketToSendTo){
     });
 }
 
+/**
+ *
+ * @param int int
+ * @returns int
+ *
+ * Kontrollerar ifall int'en är mindre än 10 och lägger till en 0 framför.
+ */
 function lessThenTen(int){
 
     if(int < 10){
@@ -487,12 +546,13 @@ function lessThenTen(int){
     return int;
 }
 
-app.use(function(req, res) {
+/**
+ * Visar felsida
+ */
+/**app.use(function(req, res) {
     res.status(404);
 
-    // respond with html page
     if (req.accepts('html')) {
         res.render('404', {url: req.url});
-        return;
     }
-});
+}); **/
