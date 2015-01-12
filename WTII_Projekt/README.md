@@ -21,7 +21,11 @@ Strängen skickas in och max 20 spel kan hämtas ut. Skulle deras api inte hitta
 **Klientsidan:** Systemet väntar på att användaren ska trycka på knappen. När det sker kontrollerar systemet om det finns något innehåll i sökfältet. Om inte skickas ett meddelande ut till användaren. Annars skickas sökningen till servernsidan.
 Systemet väntar sedan på information från servern och när den får svar kontrollerar den innehållet. Om datan är en enkel sträng skickar systemet ut det till användaren. Annars renderar han ut datan han har fått.
 
-När användaren först navigerar till webplattsen frågar klienten om data för top 5 listan. Skulle systemet inte få någon data renderas ingen top 5 lista ut.
+När användaren först navigerar till webplattsen frågar klienten om data för top 5 listan och för localStore. Skulle systemet inte få någon data renderas ingen top 5 lista ut och localStore är tom.
+
+**Säkerhet och prestandaoptimering:**
+
+**Offline-first** Varje gång en användare besöker webbplatsen så sparas all data från databasen ner till localstore. Filerna sparas också ner på webläsaren. När användaren är offline kan användaren söka på de titlar som finns i localstore. Skulle användaren inte få några träffar så meddelar systemet att det inte finns i den lokala databasen. När datan renderas ut finns också en datum på när datan senast uppdaterades.
 
 **Egen Reflektion:** Det svåra med hela projektet var att välja apier och att bestämma sig för vilka man skulle använda sig av. Jag testade mycket mot giantbomb första men gav upp då deras api inte kunde uppfylla mina syften. Jag använde mig större delen av projektet ut av de tre återstående apierna. Metacritic var det ända apiet som krävde en plattform parameter och var dessutom riktigt petig med sina sökningar. Mot den sista tiden bestämmde jag mig för att skrota metacritic och det var då jag upptäkte att igns api inte gav de träffar jag skrev in utan det första bästa de hittade. Så jag fick ändra mitt anrop och göra så att koden var flexibel med flera objekt då den innan bara hanterade ett. Detta är ett misstag som jag är glad att jag fick upptäcka då den gjorde hela min applikation mycket roligare och många fler träffar. Javascript är inte my cup of tea och jag har börjat så smått behärska det tillsammans med mongo.db men mycket kvarstår att lära sig. Det har varit intressant att använda sig ut av apier även om det mesta handlar om att arbeta "runt" apierna.
 
