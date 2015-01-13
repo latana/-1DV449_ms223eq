@@ -8,7 +8,7 @@ GameScore
 1. [ign](http://se.ign.com/)
 2. ~~giantbomb~~
 3. ~~[metacritic](http://www.metacritic.com/)~~
-4. [imdb](http://www.imdb.com/)
+4. [imdb](http://www.imdb.com/) [api](http://www.omdbapi.com/)
 
 **Språk och tekniker** Jag använder mig ut av Node.js Javascript, web sockets och som databas använde jag mig ut av mongo.
 
