@@ -1,9 +1,9 @@
 GameScore
 ================
 
-GameScore är en webbplatts där användare ska kunna göra en sökning på olika electroniska spel och får tillbaka information om spelet de sökt på. Tanken är att jag ska lägga ihop deras betyg och även skapa en top 5 lista.
+**Inledning:**GameScore är en webbplatts där användare ska kunna göra en sökning på olika electroniska spel och får tillbaka information om spelet de sökt på. Tanken är att jag ska lägga ihop deras betyg och även skapa en top 5 lista.
 
-Tänkta apier:
+**Tänkta apier:**
 
 1. [ign](http://se.ign.com/)
 2. ~~giantbomb~~
@@ -11,12 +11,8 @@ Tänkta apier:
 4. [imdb](http://www.imdb.com/)
 
 
-**Serversida:** Jag använder mig ut av Node.js Javascript. När servern får svar från clienten, tar han emot en sträng.
-Det första systemet gör är att kolla ifall det finns någon titel som som matchar sökningen. Skulle användaren skriva in
-"mass" så hämtar systemet alla 3 Mass Effect spelen. När systemet väl har hittat sina spel kontrolleras deras timestamp.
-Skulle någon av spelens timestamp gått ut så börjar systemet genast göra en sökning på ign. Det första apiet. Om alla
-spel är fräsha så skickas det till klienten. Ign's api är väldigt flexibelt och klarar av en sökning på lösa ord.
-Strängen skickas in och max 20 spel kan hämtas ut. Skulle deras api inte hitta något så skickar systemet ett meddelande till klienten. När systemet är klart så går den vidare till omdb. En lop startas och systemet skickar in alla speltitlar han hittat från ign. Omdb har inga användarvilkor som jag har hittat så jag förmodar att jag inte har någon begränsning. Systemet hämtar ut alla spel från omdb och alla titlar som matchar sätts ihop. Skulle omdb inte hitta någonting eller ingen titel matchar skickas ett meddelande till klienten. Nu när mashapen är klar så sparas den i databasen. Om spelet är helt nytt läggs den till och om den redan finns så uppdateras den. Därefter går systemet in i Top-5 listan och kontrollerar ifall någon av spelen redan finns och om inte kontrollerar den ifall poängen är högre än någon i listan. Om det är fallet så läggs spelet till i listan. Den sorteras och bara de 5 översta plockas ut. Därefter så skickar systemet datan till klienten.
+**Serversida:** Jag använder mig ut av Node.js Javascript och mongo När servern får svar från clienten, tar han emot en sträng. Det första systemet gör är att kolla mot databasen det finns någon titel som matchar sökningen. Skulle användaren skriva in "mass" så hämtar systemet alla 3 Mass Effect spelen. När systemet väl har hittat sina spel kontrolleras deras timestamp. Skulle någon av spelens timestamp gått ut så börjar systemet genast göra en sökning på ign. Det första apiet. Om alla spel är fräsha så skickas det till klienten. Ign's api är väldigt flexibelt och klarar av en sökning på lösa ord.
+Strängen skickas in och max 20 spel kan hämtas ut. Skulle deras api inte hitta något så skickar systemet ett meddelande till klienten. När systemet är klart så går den vidare till omdb. En lop startas och systemet skickar in alla speltitlar han hittat från ign. Omdb har inga användarvilkor som jag har hittat så jag förmodar att jag inte har någon begränsning. Systemet hämtar ut alla spel från omdb och alla titlar som matchar sätts ihop. Skulle omdb inte hitta någonting eller ingen titel matchar skickas ett meddelande till klienten. Nu när mashapen är klar så sparas den i databasen. Om spelet är helt nytt läggs den till och om den redan finns så uppdateras den. Därefter går systemet in i Top-5 listan och kontrollerar ifall någon av spelen redan finns,  Om det inte är fallet så läggs spelet till i listan. Den sorteras och bara de 5 översta plockas ut och sparas. Därefter så skickar systemet datan till klienten.
 
 **Klientsidan:** Systemet väntar på att användaren ska trycka på knappen. När det sker kontrollerar systemet om det finns något innehåll i sökfältet. Om inte skickas ett meddelande ut till användaren. Annars skickas sökningen till servernsidan.
 Systemet väntar sedan på information från servern och när den får svar kontrollerar den innehållet. Om datan är en enkel sträng skickar systemet ut det till användaren. Annars renderar han ut datan han har fått.
@@ -25,7 +21,7 @@ När användaren först navigerar till webplattsen frågar klienten om data för
 
 **Säkerhet och prestandaoptimering:**
 
-**Offline-first** Varje gång en användare besöker webbplatsen så sparas all data från databasen ner till localstore. Filerna sparas också ner på webläsaren. När användaren är offline kan användaren söka på de titlar som finns i localstore. Skulle användaren inte få några träffar så meddelar systemet att det inte finns i den lokala databasen. När datan renderas ut finns också en datum på när datan senast uppdaterades.
+**Offline-first** Varje gång en användare besöker webbplatsen så sparas all data från databasen ner till localstore. Filerna sparas också ner på webläsaren. När användaren är offline kan användaren söka på de titlar som finns i localstore. När detta sker så gör och systemet användaren uppmärksam om att användaren är offline. Skulle användaren inte få några träffar så meddelar systemet att det inte finns i offline mode. När datan renderas ut finns också en datum på när datan senast uppdaterades.
 
 **Egen Reflektion:** Det svåra med hela projektet var att välja apier och att bestämma sig för vilka man skulle använda sig av. Jag testade mycket mot giantbomb första men gav upp då deras api inte kunde uppfylla mina syften. Jag använde mig större delen av projektet ut av de tre återstående apierna. Metacritic var det ända apiet som krävde en plattform parameter och var dessutom riktigt petig med sina sökningar. Mot den sista tiden bestämmde jag mig för att skrota metacritic och det var då jag upptäkte att igns api inte gav de träffar jag skrev in utan det första bästa de hittade. Så jag fick ändra mitt anrop och göra så att koden var flexibel med flera objekt då den innan bara hanterade ett. Detta är ett misstag som jag är glad att jag fick upptäcka då den gjorde hela min applikation mycket roligare och många fler träffar. Javascript är inte my cup of tea och jag har börjat så smått behärska det tillsammans med mongo.db men mycket kvarstår att lära sig. Det har varit intressant att använda sig ut av apier även om det mesta handlar om att arbeta "runt" apierna.
 
