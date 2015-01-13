@@ -236,8 +236,8 @@ function storeInDataBase(hybridArray) {
 
                     if (oldObj.title === newObj.title) {
 
-                            tempArray.push(newObj);
-                            deleteArray.push(oldObj);
+                        tempArray.push(newObj);
+                        deleteArray.push(oldObj);
 
                         return false; //Break every-loop
                     }
@@ -257,7 +257,7 @@ function storeInDataBase(hybridArray) {
             });
 
             tempArray.forEach(function (element) {
-                collection.insert(element, function (err,doc) {
+                collection.insert(element, function (err) {
 
                     if (err) {
                         console.log("There was a problem adding the information to the database.");
@@ -373,44 +373,9 @@ function checkTopFive(hybridArray){
                 }
             });
 
-            data.forEach(function (element) {
-                collection.insert(element, function(err,doc){
-
-                    if(err){
-                        console.log("There was a problem adding the information to the database.");
-                    }
-                });
-            });
-        }
-        else if (data.length < 5) {
-
-            var tempArray = [];
-            var count = 0;
-
-            hybridArray.forEach(function (newObj) {
-                data.every(function (oldObj) {
-
-                    count ++;
-
-                    if(oldObj.title === newObj.title) {
-                        return false; //Break every-loop
-                    }
-
-                    if(count === data.length && newObj.score !== "No information") {
-                        tempArray.push(newObj);
-                        return false; //Break every-loop
-                    }
-                    return true; //Continue every-loop
-                });
-                count = 0;
-            });
-
-            pushData(data, tempArray);
             data = spliceData(sortData(data));
-            collection.remove();
 
             data.forEach(function (element) {
-                delete element._id;
                 collection.insert(element, function(err,doc){
 
                     if(err){
@@ -421,19 +386,22 @@ function checkTopFive(hybridArray){
         }
         else{
             var tempArray = [];
-
+            var count = 0;
             hybridArray.forEach(function (newObj) {
                 data.every(function (oldObj) {
+
+                    count ++;
 
                     if(oldObj.title === newObj.title) {
                         return false; //Break every-loop
                     }
-                    if (Number(newObj.score) > Number(oldObj.score && newObj.score !== "No information")) {
+                    if (count === data.length && newObj.score !== "No information") {
                         tempArray.push(newObj);
                         return false; //Break every-loop
                     }
                     return true; //Continue every-loop
                 });
+                count = 0;
             });
             pushData(data, tempArray);
             data = spliceData(sortData(data));
@@ -549,10 +517,10 @@ function lessThenTen(int){
 /**
  * Visar felsida
  */
-/**app.use(function(req, res) {
+app.use(function(req, res) {
     res.status(404);
 
     if (req.accepts('html')) {
         res.render('404', {url: req.url});
     }
-}); **/
+});

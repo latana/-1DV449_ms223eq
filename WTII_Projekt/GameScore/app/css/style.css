@@ -1,6 +1,74 @@
+body{
+    background: url("../img/background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.table{
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+    -moz-box-shadow: 5px 5px 20px #333;
+    -webkit-box-shadow: 5px 5px 20px #333;
+    -o-box-shadow: 5px 5px 20px #333;
+    box-shadow: 5px 5px 20px #333;
+}
+
+#topfiveTitle{
+
+    background-color: white;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#domPics{
+
+    border-radius: 5px 5px 5px 5px;
+}
+
+.text-danger{
+    margin-left:auto;
+    margin-right:auto;
+    background-color: white;
+    color: #a94442;
+    width: 300px;
+    border-radius: 10px 10px 10px 10px;
+    text-align: center;
+}
+
 #loader{
 
-    width:50%;
+    float:left;
+    width:8%;
+}
+
+#loading{
+
+    margin-top:3px;
+    float:left;
+}
+
+#gif{
+    width: 246px;
+    height: 50px;
+    float: left;
+}
+
+#picDiv{
+    width:160px;
+    height:229px;
+    padding: 9px 0px 0px 0px;
+    margin: 0px 0px 0px 945px;
+}
+
+#infoDiv{
+    width: 80%;
+    margin: -230px 0px 0px 10px;
 }
 
 .stylish-input-group .input-group-addon{
@@ -17,6 +85,7 @@
 }
 
 #resultDiv{
+    background-color: #f5f5f5;
     -moz-box-shadow: 5px 5px 20px #333;
     -webkit-box-shadow: 5px 5px 20px #333;
     -o-box-shadow: 5px 5px 20px #333;
@@ -25,9 +94,19 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    margin-bottom: 65px;
 }
+
+.domDesc{
+
+    min-height: 74px;
+}
+
 
 #top-5{
 
     text-size:50%;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }

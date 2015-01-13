@@ -4,6 +4,7 @@
 
 var socket = io.connect('http://localhost:8000');
 var onlyOneGif;
+var offline;
 
 /**
  * Renderar ut datan om den finns.
@@ -14,6 +15,7 @@ socket.on('render', function (data) {
     var resultDiv = document.getElementById('result');
 
     deleteDiv();
+    deleteGif();
 
     if(data !== null) {
 
@@ -28,17 +30,10 @@ socket.on('render', function (data) {
             }
             else{
                 for(var i = 0; i < data.length; i++) {
-
                     addResult(data[i]);
                 }
             }
         }
-
-        var domForm = document.getElementById('gif');
-        var loader = document.getElementById('loader');
-        domForm.removeChild(loader);
-
-        onlyOneGif = false;
     }
 });
 
@@ -96,19 +91,28 @@ function addResult(data){
     domPlatform.textContent = "Platform: " + data.platform;
     domLastUpdate.textContent = "Last Update: " + data.lastUpdate;
 
-    div.appendChild(domPics);
-    div.appendChild(domTitle);
-    div.appendChild(domReleased);
-    div.appendChild(domScore);
-    div.appendChild(domPublisher);
-    div.appendChild(domPlatform);
-    div.appendChild(domDesc);
-    div.appendChild(domLastUpdate);
+    var picDiv = document.createElement("div");
+    picDiv.setAttribute('id', 'picDiv');
+
+    picDiv.appendChild(domPics);
+    var infoDiv = document.createElement('div');
+    infoDiv.setAttribute('id', 'infoDiv');
+
+
+    div.appendChild(picDiv);
+    infoDiv.appendChild(domTitle);
+    infoDiv.appendChild(domReleased);
+    infoDiv.appendChild(domScore);
+    infoDiv.appendChild(domPublisher);
+    infoDiv.appendChild(domPlatform);
+    infoDiv.appendChild(domDesc);
+    infoDiv.appendChild(domLastUpdate);
+    div.appendChild(infoDiv);
     resultDiv.appendChild(div);
 }
 
 /**
- * Frågar serversidan om top 5 listan. och skriver ut datan om det finns någon data.
+ * Frågar serversidan om top 5 listan. och skriver ut datan om det finns någon.
  */
 function createTopFive() {
 
@@ -118,7 +122,9 @@ function createTopFive() {
         if(data.length !== 0){
 
             var h3 = document.createElement("h3");
+            h3.setAttribute("id", "topfiveTitle");
             h3.textContent = "Top 5 list";
+            h3.setAttribute('class', 'text-center')
             var top5Div = document.getElementById('top-5');
             top5Div.appendChild(h3);
             var table = document.createElement("table");
@@ -176,13 +182,18 @@ window.onload = function () {
         }
         else{
 
+            createLoadingGif();
+
             if(navigator.onLine){
 
-                createLoadingGif();
+                offline = false;
+                online();
                 socket.emit("search", {search: searchValue});
             }
             else {
+
                 deleteDiv();
+                offlineNotify();
 
                 var storage = localStorage.getItem("localList");
 
@@ -206,11 +217,14 @@ window.onload = function () {
                             message(notFound, div);
                         }
                     }
+                    deleteGif();
+
                 }
                 else{
                     var offlinediv = document.getElementById("result");
                     var offlineMessage = "There is no data in offline mode";
                     message(offlineMessage, offlinediv);
+                    deleteGif();
                 }
             }
         }
@@ -230,6 +244,11 @@ function createLoadingGif() {
         loader.setAttribute("src", "img/loader.gif");
         loader.setAttribute("id", "loader");
         var domForm = document.getElementById('gif');
+        var loadingText = document.createElement('p');
+        loadingText.textContent = "Searching...";
+        loadingText.setAttribute('id', 'loading');
+
+        domForm.appendChild(loadingText);
         domForm.appendChild(loader);
     }
 }
@@ -286,11 +305,35 @@ function offlineNotify(){
 
     if(!navigator.onLine){
 
-        var offlineDiv = document.getElementById('offline');
-        var offlinetext = document.createElement('h4');
-        offlinetext.textContent = "Offline Mode"
-        offlineDiv.appendChild(offlinetext);
+        if(!offline) {
+
+            offline = true;
+            var offlineDiv = document.getElementById('offline');
+            var offlinetext = document.createElement('h4');
+            offlinetext.textContent = "Offline Mode"
+            offlineDiv.appendChild(offlinetext);
+        }
     }
+}
+
+function online(){
+
+    var offlineDiv = document.getElementById('offline');
+
+    while (offlineDiv.firstChild) {
+        offlineDiv.removeChild(offlineDiv.firstChild);
+    }
+}
+
+function deleteGif(){
+
+    var domForm = document.getElementById('gif');
+    var loader = document.getElementById('loader');
+    var loadingText = document.getElementById('loading');
+    domForm.removeChild(loader);
+    domForm.removeChild(loadingText);
+
+    onlyOneGif = false;
 }
 
 offlineNotify();
