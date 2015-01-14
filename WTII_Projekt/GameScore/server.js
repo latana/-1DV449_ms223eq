@@ -13,7 +13,7 @@ var application_root = __dirname,
     app = express(),
     mongo = require('mongodb'),
     monk = require('monk'),
-    db = monk('localhost:27017/test'),
+    db = monk('mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/gamescore'),
     router = express.Router();
 
 var env = process.env.NODE_ENV || 'development';
@@ -48,8 +48,8 @@ var io = require('socket.io').listen(server);
 
 // Namn på collection's
 
-var gameTest = "gameTest6";
-var topFive = "topFiveTest2";
+var gameSearch = "gameSearch";
+var topFive = "topFive";
 
 /**
  *  Startar när användaren anländer till webbplatsen.
@@ -59,7 +59,7 @@ io.on("connection", function(socket){
 
     socket.on('localStore', function(){
 
-        var collection = db.get(gameTest);
+        var collection = db.get(gameSearch);
 
         collection.find({}, function (err, data) {
 
@@ -102,7 +102,7 @@ io.on("connection", function(socket){
 
         var search = data.search.toLowerCase();
 
-        var collection = db.get(gameTest);
+        var collection = db.get(gameSearch);
 
         if(search !== undefined || search !== "") {
 
@@ -215,7 +215,7 @@ function getOmdb(search, ignArray, socketToSendTo) {
 
 function storeInDataBase(hybridArray) {
 
-    var collection = db.get(gameTest);
+    var collection = db.get(gameSearch);
 
     collection.find({}, function (err, data) {
 
@@ -491,7 +491,7 @@ function checkValue(string){
 function findInDataBase(search, socketToSendTo){
 
     var query = { title: new RegExp('^' + search) };
-    var collection = db.get(gameTest);
+    var collection = db.get(gameSearch);
     collection.find(query,function(err, data) {
 
         if(data.length === 0){
