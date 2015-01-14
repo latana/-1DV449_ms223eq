@@ -3,6 +3,15 @@ GameScore
 
 **Inledning:**GameScore är en webbplats där användare ska kunna göra en sökning på olika electroniska spel och får tillbaka information om spelet de sökt på. Tanken var att jag ska lägga ihop deras betyg och även skapa en top 5 lista. Listan uppdateras efterhand som användarna söker på spel.
 
+[Länk till den publika webbplatsen](http://gamescore-latana.rhcloud.com/)
+
+**Filer av intresse**
+1. [server.js](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Projekt/GameScore/server.js)
+2. [renderMashup.js](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Projekt/GameScore/app/js/renderMashup.js)
+3. [index.html](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Projekt/GameScore/app/index.html)
+4. [manifest.appcache](https://github.com/latana/-1DV449_ms223eq/blob/master/WTII_Projekt/GameScore/app/manifest.appcache)
+
+
 **Tänkta apier:**
 
 1. [ign](http://se.ign.com/)
@@ -11,6 +20,8 @@ GameScore
 4. [imdb](http://www.imdb.com/) [api](http://www.omdbapi.com/)
 
 **Språk och tekniker** Jag använder mig ut av Node.js Javascript, web sockets och som databas använde jag mig ut av mongo.
+
+[Diagram över dataflödet.](https://github.com/latana/-1DV449_ms223eq/issues/1)
 
 **Serversida:** När servern får svar från klienten, tar han emot en sträng. Det systemet gör är att kolla mot databasen om det finns någon titel som matchar sökningen. Skulle användaren skriva in "mass" så hämtar systemet alla 3 Mass Effect spelen. Om systemet hittar sina spel kontrolleras deras timestamp. Skulle någon av spelens timestamp gått ut så börjar systemet genast göra en sökning på ign. Det första apiet. Om alla spel är fräsha så skickas det till klienten. Ign's api är väldigt flexibelt och klarar av en sökning på lösa ord. Strängen skickas in och max 20 spel kan hämtas ut. Skulle deras api inte hitta något så skickar systemet ett meddelande till klienten. När systemet är klart så går den vidare till omdb. En lop startas och systemet skickar in alla speltitlar systemet hittat från ign. Omdb har inga användarvilkor som jag har hittat så jag förmodar att jag inte har någon begränsning. Systemet hämtar ut alla spel från omdb och alla titlar som matchar sätts ihop. Skulle omdb inte hitta någonting eller ingen titel matchar skickas ett meddelande till klienten. Nu när mashapen är klar så sparas den i databasen. Om spelet är helt nytt läggs den till och om den redan finns så uppdateras den. Därefter går systemet in i Top-5 listan och kontrollerar ifall någon av spelen redan finns,  Om det inte är fallet så läggs spelet till i listan. Den sorteras och bara de 5 översta plockas ut och sparas. Därefter så skickar systemet datan till klienten.
 
