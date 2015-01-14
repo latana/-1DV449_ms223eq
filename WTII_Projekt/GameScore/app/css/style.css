@@ -11,10 +11,12 @@ body{
 .table{
     background-color: white;
     border-radius: 5px 5px 5px 5px;
+    border: 1px solid black;
     -moz-box-shadow: 5px 5px 20px #333;
     -webkit-box-shadow: 5px 5px 20px #333;
     -o-box-shadow: 5px 5px 20px #333;
     box-shadow: 5px 5px 20px #333;
+    border-collapse: separate;
 }
 
 #topfiveTitle{
@@ -24,11 +26,13 @@ body{
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px 5px 5px 5px;
+    border: 1px solid black;
 }
 
 #domPics{
 
     border-radius: 5px 5px 5px 5px;
+    border: 1px solid black;
 }
 
 .text-danger{
@@ -38,6 +42,7 @@ body{
     color: #a94442;
     width: 300px;
     border-radius: 10px 10px 10px 10px;
+    border: 1px solid black;
     text-align: center;
 }
 
@@ -57,18 +62,6 @@ body{
     width: 246px;
     height: 50px;
     float: left;
-}
-
-#picDiv{
-    width:160px;
-    height:229px;
-    padding: 9px 0px 0px 0px;
-    margin: 0px 0px 0px 945px;
-}
-
-#infoDiv{
-    width: 80%;
-    margin: -230px 0px 0px 10px;
 }
 
 .stylish-input-group .input-group-addon{
@@ -95,7 +88,9 @@ body{
     -moz-border-radius: 10px;
     border-radius: 10px;
     margin-bottom: 65px;
+    border: 1px solid black;
 }
+
 
 .domDesc{
 
@@ -109,4 +104,16 @@ body{
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+}
+
+#picDiv{
+    width:160px;
+    height:229px;
+    padding: 9px 0px 0px 0px;
+    margin: 0px 0px 0px 945px;
+}
+
+#infoDiv{
+    width: 80%;
+    margin: -230px 0px 0px 10px;
 }

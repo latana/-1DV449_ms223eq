@@ -45,12 +45,15 @@ var server = app.listen(port, ipaddr, function () {
 
 
 var io = require('socket.io').listen(server);
+
+// Namn på collection's
+
 var gameTest = "gameTest6";
 var topFive = "topFiveTest2";
 
 /**
  *  Startar när användaren anländer till webbplatsen.
- *  Kontrollerar om det finns någon data i top 5 listan och sänder ut det till klienten
+ * Kontrollerar om det finns någon data i sök collection, tar bort alla id och sänder ut det till klienten.
  */
 io.on("connection", function(socket){
 
@@ -75,6 +78,9 @@ io.on("connection", function(socket){
         });
     });
 
+    /**
+     * Kontrollerar om det finns någon data i top 5 listan och sänder ut det till klienten
+     */
     socket.on('top-Five', function(){
 
         var collection = db.get(topFive);
@@ -328,8 +334,7 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
                 }
                 var date = new Date();
 
-                var timeStamp = Number(date.getTime() + 300000);
-                hybrid['timestamp'] = timeStamp;
+                hybrid['timestamp'] = Number(date.getTime() + 300000);
                 hybrid['lastUpdate'] = lastUpdate;
 
                 hybridArray.push(hybrid);
