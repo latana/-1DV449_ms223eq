@@ -3,6 +3,8 @@ GameScore
 
 **Inledning:**GameScore är en webbplats där användare ska kunna göra en sökning på olika electroniska spel och får tillbaka information om spelet de sökt på. Tanken var att jag ska lägga ihop deras betyg och även skapa en top 5 lista. Listan uppdateras efterhand som användarna söker på spel.
 
+[Länk till presentationsvideo](https://www.youtube.com/watch?v=rm5u678uc8g&feature=youtu.be)
+
 [Länk till den publika webbplatsen](http://gamescore-latana.rhcloud.com/)
 
 **Filer av intresse**
