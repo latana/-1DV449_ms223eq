@@ -2,7 +2,11 @@
  * Created by Latana on 2014-12-19.
  */
 
-var socket = io.connect('http://localhost:8000');
+if(navigator.onLine) {
+    var socket = io.connect('hemlig socketanslutning');
+    storeLocal();
+    createTopFive();
+}
 var onlyOneGif;
 var offline;
 
@@ -10,33 +14,34 @@ var offline;
  * Renderar ut datan om den finns.
  * Annars renderar ett meddelande
  */
-socket.on('render', function (data) {
+if(navigator.onLine) {
+    socket.on('render', function (data) {
 
-    var resultDiv = document.getElementById('result');
+        var resultDiv = document.getElementById('result');
 
-    deleteDiv();
-    deleteGif();
+        deleteDiv();
+        deleteGif();
 
-    if(data !== null) {
+        if (data !== null) {
 
-        if(typeof data === "string"){
+            if (typeof data === "string") {
 
-            message(data, resultDiv);
-        }
-        else{
-            if(typeof data.title === "string"){
-
-                addResult(data);
+                message(data, resultDiv);
             }
-            else{
-                for(var i = 0; i < data.length; i++) {
-                    addResult(data[i]);
+            else {
+                if (typeof data.title === "string") {
+
+                    addResult(data);
+                }
+                else {
+                    for (var i = 0; i < data.length; i++) {
+                        addResult(data[i]);
+                    }
                 }
             }
         }
-    }
-});
-
+    });
+}
 /**
  *
  * @param data objekt
@@ -98,7 +103,6 @@ function addResult(data){
     var infoDiv = document.createElement('div');
     infoDiv.setAttribute('id', 'infoDiv');
 
-
     div.appendChild(picDiv);
     infoDiv.appendChild(domTitle);
     infoDiv.appendChild(domReleased);
@@ -112,7 +116,7 @@ function addResult(data){
 }
 
 /**
- * Frågar serversidan om top 5 listan. och skriver ut datan om det finns någon.
+ * Frågar serversidan om top 5 listan och skriver ut datan om det finns någon.
  */
 function createTopFive() {
 
@@ -139,7 +143,6 @@ function createTopFive() {
             table.appendChild(tr);
             top5Div.appendChild(table);
 
-
             data.sort(function(obj1, obj2) {
                 return obj2['score'] - obj1['score'];
             });
@@ -164,72 +167,73 @@ function createTopFive() {
  */
 window.onload = function () {
 
-    document.getElementById("search").onclick = function (e) {
-        e.preventDefault();
+    document.getElementById("search").onclick = search;
+    document.getElementById("form").onsubmit = search;
+};
 
-        var searchValue = document.getElementById("searchField").value;
+function search(e) {
+    e.preventDefault();
 
-        if(searchValue === "") {
+    var searchValue = document.getElementById("searchField").value;
 
-            var resultDiv = document.getElementById('result');
+    if(searchValue === "") {
+
+        var resultDiv = document.getElementById('result');
+
+        deleteDiv();
+
+        var domMessage = document.createElement('p');
+        domMessage.setAttribute("class", "text-danger");
+        domMessage.textContent = "The field is empty";
+        resultDiv.appendChild(domMessage);
+    }
+    else{
+        createLoadingGif();
+
+        if(navigator.onLine){
+
+            offline = false;
+            online();
+            socket.emit("search", {search: searchValue});
+        }
+        else {
 
             deleteDiv();
+            offlineNotify();
 
-            var domMessage = document.createElement('p');
-            domMessage.setAttribute("class", "text-danger");
-            domMessage.textContent = "The field is empty";
-            resultDiv.appendChild(domMessage);
-        }
-        else{
+            var storage = localStorage.getItem("localList");
 
-            createLoadingGif();
+            if(storage !== null) {
 
-            if(navigator.onLine){
+                storage = JSON.parse(storage);
+                var count = 0;
 
-                offline = false;
-                online();
-                socket.emit("search", {search: searchValue});
-            }
-            else {
+                for(var i = 0; i < storage.length; i++) {
 
-                deleteDiv();
-                offlineNotify();
+                    count ++;
+                    if (storage[i].title === searchValue) {
 
-                var storage = localStorage.getItem("localList");
-
-                if(storage !== null) {
-
-                    storage = JSON.parse(storage);
-                    var count = 0;
-
-                    for(var i = 0; i < storage.length; i++) {
-
-                        count ++;
-                        if (storage[i].title === searchValue) {
-
-                            createLoadingGif();
-                            addResult(storage[i]);
-                            break;
-                        }
-                        if (count === storage.length){
-                            var div = document.getElementById("result");
-                            var notFound = "The game could not be found in offline mode";
-                            message(notFound, div);
-                        }
+                        createLoadingGif();
+                        addResult(storage[i]);
+                        break;
                     }
-                    deleteGif();
-
+                    if (count === storage.length){
+                        var div = document.getElementById("result");
+                        var notFound = "The game could not be found in offline mode";
+                        message(notFound, div);
+                    }
                 }
-                else{
-                    var offlinediv = document.getElementById("result");
-                    var offlineMessage = "There is no data in offline mode";
-                    message(offlineMessage, offlinediv);
-                    deleteGif();
-                }
+                deleteGif();
+            }
+            else{
+                var offlinediv = document.getElementById("result");
+                var offlineMessage = "There is no data in offline mode";
+                message(offlineMessage, offlinediv);
+                deleteGif();
             }
         }
     }
-};
+}
 
 /**
  * skapar en laddnings gif men bara ifall den inte redan finns framme.
@@ -272,6 +276,11 @@ function titleHandler(string){
     return fullTitle;
 }
 
+/**
+ *
+ * @param data string
+ * @param resultDiv domObject
+ */
 function message(data, resultDiv){
 
     var div = document.createElement('div');
@@ -283,6 +292,9 @@ function message(data, resultDiv){
     resultDiv.appendChild(div);
 }
 
+/**
+ * Tar bort allt innehåll i result diven.
+ */
 function deleteDiv(){
 
     var resultDiv = document.getElementById('result');
@@ -292,6 +304,9 @@ function deleteDiv(){
     }
 }
 
+/**
+ * Kallar på servern och får data som sparas i localstore
+ */
 function storeLocal(){
 
     socket.emit("localStore");
@@ -301,6 +316,9 @@ function storeLocal(){
     });
 }
 
+/**
+ * Ser till att skriva ut offline mode om man inte är offline
+ */
 function offlineNotify(){
 
     if(!navigator.onLine){
@@ -316,6 +334,9 @@ function offlineNotify(){
     }
 }
 
+/**
+ * Tar bort offlinetexten när man är online.
+ */
 function online(){
 
     var offlineDiv = document.getElementById('offline');
@@ -325,6 +346,9 @@ function online(){
     }
 }
 
+/**
+ * Tar bort laddnings giffen.
+ */
 function deleteGif(){
 
     var domForm = document.getElementById('gif');
@@ -337,5 +361,3 @@ function deleteGif(){
 }
 
 offlineNotify();
-storeLocal();
-createTopFive();

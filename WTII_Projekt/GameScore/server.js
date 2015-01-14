@@ -13,19 +13,17 @@ var application_root = __dirname,
     app = express(),
     mongo = require('mongodb'),
     monk = require('monk'),
-    db = monk('localhost:27017/test'),
+    db = monk('hemlig databasanslutning'),
     router = express.Router();
 
 var env = process.env.NODE_ENV || 'development';
 
 
-if ('development' == env) {
+app.use('/', express.static(path.join(application_root, 'app')));
+app.use(morgan('dev'));
+app.use(bodyParser());
+app.use(errorHandler({dumpExceptions: true, showStack: true}));
 
-    app.use('/', express.static(path.join(application_root, 'app')));
-    app.use(morgan('dev'));
-    app.use(bodyParser());
-    app.use(errorHandler({dumpExceptions: true, showStack: true}));
-}
 
 //Start server
 var ipaddr = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -44,12 +42,11 @@ var server = app.listen(port, ipaddr, function () {
 });
 
 
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {origins:'*:*'});
 
 // Namn på collection's
-
-var gameTest = "gameTest6";
-var topFive = "topFiveTest2";
+var gameSearch = "gameSearch";
+var topFive = "topFive";
 
 /**
  *  Startar när användaren anländer till webbplatsen.
@@ -59,11 +56,11 @@ io.on("connection", function(socket){
 
     socket.on('localStore', function(){
 
-        var collection = db.get(gameTest);
+        var collection = db.get(gameSearch);
 
         collection.find({}, function (err, data) {
 
-            if(data.length !== 0) {
+            if(data !== undefined && data.length !== 0) {
 
                 data.forEach(function (element) {
                     delete element._id;
@@ -87,7 +84,7 @@ io.on("connection", function(socket){
 
         collection.find({}, function (err, data) {
 
-            if(data.length !== 0) {
+            if(data !== undefined && data.length !== 0) {
 
                 socket.emit('top-Five', data);
             }
@@ -102,7 +99,7 @@ io.on("connection", function(socket){
 
         var search = data.search.toLowerCase();
 
-        var collection = db.get(gameTest);
+        var collection = db.get(gameSearch);
 
         if(search !== undefined || search !== "") {
 
@@ -113,7 +110,7 @@ io.on("connection", function(socket){
                 var date = new Date();
                 var dateNow = date.getTime();
 
-                if (data.length !== 0) {
+                if (data !== undefined && data.length !== 0) {
 
                     var timeStampToLow = false;
 
@@ -151,9 +148,9 @@ function getIgn(search, socketToSendTo) {
      .header("X-Mashape-Key", "7NUyQhIDn9mshTIkUcz4vivSR0jBp1p2SlajsnfMX3QASk21pL")
      .end(function (result) {
 
-            if(result.body.length === 0){
+            if(typeof result.error === 'object' || result.body.length === 0){
 
-                findInDataBase(search, socketToSendTo)
+                findInDataBase(search, socketToSendTo);
             }
             else{
                 getOmdb(search, result.body, socketToSendTo);
@@ -184,27 +181,34 @@ function getOmdb(search, ignArray, socketToSendTo) {
         unirest.get("http://www.omdbapi.com/?t=" + ignSearch + "&y=&plot=full&r=json")
             .end(function (result) {
 
-                count ++;
+                count++;
 
-                var temp = JSON.parse(result.body);
+                if(typeof result.error === 'object' && count === ignArray.length){
 
-                if(temp['Response'] === "True" && temp['Type'] === "game"){
-
-                    omdbArray.push(temp);
+                    findInDataBase(search, socketToSendTo);
                 }
-                if(count === ignArray.length){
 
-                    if(omdbArray.length === 0){
+                if(typeof result.body === 'string') {
 
-                        findInDataBase(search, socketToSendTo);
+                    var temp = JSON.parse(result.body);
+
+                    if (temp['Response'] === "True" && temp['Type'] === "game") {
+
+                        omdbArray.push(temp);
                     }
-                    else{
-                        mashup(ignArray, omdbArray, socketToSendTo);
+                    if (count === ignArray.length) {
+
+                        if (omdbArray.length === 0) {
+
+                            findInDataBase(search, socketToSendTo);
+                        }
+                        else {
+                            mashup(ignArray, omdbArray, socketToSendTo);
+                        }
                     }
                 }
             });
     }
-
 }
 
 /**
@@ -215,22 +219,23 @@ function getOmdb(search, ignArray, socketToSendTo) {
 
 function storeInDataBase(hybridArray) {
 
-    var collection = db.get(gameTest);
+    var collection = db.get(gameSearch);
 
     collection.find({}, function (err, data) {
 
         var count = 0;
         var tempArray = [];
         var deleteArray = [];
+        var dataArray = [];
 
-        if(data.length === 0){
+        if(data === undefined || data.length === 0){
 
             hybridArray.forEach(function (newObj) {
 
-                data.push(newObj);
+                dataArray.push(newObj);
             });
 
-            data.forEach(function (element) {
+            dataArray.forEach(function (element) {
                 collection.insert(element);
             });
         }
@@ -367,8 +372,6 @@ function checkTopFive(hybridArray){
 
     collection.find({}, function (err, data) {
 
-        data = sortData(data);
-
         if(data.length === 0){
 
             hybridArray.forEach(function (newObj) {
@@ -377,7 +380,6 @@ function checkTopFive(hybridArray){
                     data.push(newObj);
                 }
             });
-
             data = spliceData(sortData(data));
 
             data.forEach(function (element) {
@@ -392,6 +394,8 @@ function checkTopFive(hybridArray){
         else{
             var tempArray = [];
             var count = 0;
+            data = sortData(data);
+
             hybridArray.forEach(function (newObj) {
                 data.every(function (oldObj) {
 
@@ -408,17 +412,23 @@ function checkTopFive(hybridArray){
                 });
                 count = 0;
             });
-            pushData(data, tempArray);
-            data = spliceData(sortData(data));
-            collection.remove();
+            data = pushData(data, tempArray);
+            data = sortData(data);
+            data = spliceData(data);
 
-            data.forEach(function (element) {
-                delete element._id;
-                collection.insert(element, function(err,doc){
+            collection.remove(function(){
 
-                    if(err){
-                        console.log("There was a problem adding the information to the database.");
+                data.forEach(function (element) {
+
+                    if(element._id) {
+                        delete element._id;
                     }
+                    collection.insert(element, function(err,doc){
+
+                        if(err){
+                            console.log("There was a problem adding the information to the database.");
+                        }
+                    });
                 });
             });
         }
@@ -432,8 +442,8 @@ function checkTopFive(hybridArray){
  */
 function sortData(data){
 
-    data.sort(function(obj1, obj2) {
-        return obj2['score'] - obj1['score'];
+    data = data.sort(function(obj1, obj2) {
+        return Number(obj2['score']) - Number(obj1['score']);
     });
     return data;
 }
@@ -491,7 +501,7 @@ function checkValue(string){
 function findInDataBase(search, socketToSendTo){
 
     var query = { title: new RegExp('^' + search) };
-    var collection = db.get(gameTest);
+    var collection = db.get(gameSearch);
     collection.find(query,function(err, data) {
 
         if(data.length === 0){
