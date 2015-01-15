@@ -106,6 +106,7 @@ io.on("connection", function(socket){
 
             var query = { title: new RegExp('^' + search) };
 
+            // Hämtar liknande titlar
             collection.find(query,function(err, data){
 
                 var date = new Date();
@@ -115,6 +116,7 @@ io.on("connection", function(socket){
 
                     var timeStampToLow = false;
 
+                    // Är någon hämtad titel för gammal hämtas nytt
                     for (var i = 0; i < data.length; i++) {
 
                         if (Number(data[i]['timestamp']) < Number(dateNow)) {
@@ -189,6 +191,7 @@ function getOmdb(search, ignArray, socketToSendTo) {
                     findInDataBase(search, socketToSendTo);
                 }
 
+                // Får systemet något resultat så parsas den.
                 if(typeof result.body === 'string') {
 
                     var temp = JSON.parse(result.body);
@@ -197,6 +200,7 @@ function getOmdb(search, ignArray, socketToSendTo) {
 
                         omdbArray.push(temp);
                     }
+                    // Kommer in när loopen är klar
                     if (count === ignArray.length) {
 
                         if (omdbArray.length === 0) {
@@ -217,11 +221,11 @@ function getOmdb(search, ignArray, socketToSendTo) {
  * @param hybridArray array
  * Sparar ner mashapen i en databas och sätter en timestamp på 5 min
  */
-
 function storeInDataBase(hybridArray) {
 
     var collection = db.get(gameSearch);
 
+    // Kollar i databasen
     collection.find({}, function (err, data) {
 
         var count = 0;
@@ -229,6 +233,7 @@ function storeInDataBase(hybridArray) {
         var deleteArray = [];
         var dataArray = [];
 
+        // Om det inte finns någon data
         if(data === undefined || data.length === 0){
 
             hybridArray.forEach(function (newObj) {
@@ -241,6 +246,7 @@ function storeInDataBase(hybridArray) {
             });
         }
         else {
+            //Förnyar titlar som finns och lägger in titlar som inte finns
             hybridArray.forEach(function (newObj) {
                 data.every(function (oldObj) {
 
@@ -264,10 +270,12 @@ function storeInDataBase(hybridArray) {
                 count = 0;
             });
 
+            // Tar bort de id'n som ska förnyas
             deleteArray.forEach(function(element) {
                 collection.remove({_id: element._id});
             });
 
+            // Lägger till titlar
             tempArray.forEach(function (element) {
                 collection.insert(element, function (err) {
 
@@ -305,6 +313,7 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
 
     var lastUpdate = year +"-"+ month + "-" + day;
 
+    //Lägger ihopa informationen till hybrid och sedan pushar in hybrid i hybridArray
     ignArray.forEach(function(ignObject){
         omdbArray.every(function (omdbObject) {
             if(ignObject.title === omdbObject.Title){
@@ -326,6 +335,7 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
                 hybrid['publisher'] = checkValue(ignObject['publisher']);
                 hybrid['pic'] = ignObject['thumb'];
 
+                // Platform lopas igenom för att sätta ihop till en sträng
                 for (i in ignObject['platforms']) {
 
                     if (hybrid['platform'] == undefined) {
@@ -338,6 +348,7 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
                 }
                 var date = new Date();
 
+                // Sätter timestamp och när den uppdaterades
                 hybrid['timestamp'] = Number(date.getTime() + 300000);
                 hybrid['lastUpdate'] = lastUpdate;
 
@@ -349,11 +360,13 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
         });
     });
 
+    // Skriver ut meddelande om det inte blir någon mashup
     if(hybridArray.length === 0){
         var message = "Could not find a match";
         socketToSendTo.emit('render', message);
     }
     else {
+        // Sparar i databaserna och skickar till klienten
         storeInDataBase(hybridArray);
         checkTopFive(hybridArray);
         socketToSendTo.emit('render', hybridArray);
@@ -369,8 +382,10 @@ function checkTopFive(hybridArray){
 
     var collection = db.get(topFive);
 
+    // Kollar i top-five databasen
     collection.find({}, function (err, data) {
 
+        // Om listan är tom så läggs alla spel som har poäng till i listan.
         if(data.length === 0){
 
             hybridArray.forEach(function (newObj) {
@@ -379,8 +394,10 @@ function checkTopFive(hybridArray){
                     data.push(newObj);
                 }
             });
+            // Datan sorteras efter poäng och de 5 översta plockas ut
             data = spliceData(sortData(data));
 
+            // Sparar i databasen
             data.forEach(function (element) {
                 collection.insert(element, function(err,doc){
 
@@ -395,6 +412,7 @@ function checkTopFive(hybridArray){
             var count = 0;
             data = sortData(data);
 
+            // Plockar ut de titlar som är unika och har poäng
             hybridArray.forEach(function (newObj) {
                 data.every(function (oldObj) {
 
@@ -411,12 +429,14 @@ function checkTopFive(hybridArray){
                 });
                 count = 0;
             });
+            // Stoppar in tempArray in i data, sorterar och plockar ut de 5 översta.
             data = pushData(data, tempArray);
             data = sortData(data);
             data = spliceData(data);
 
             collection.remove(function(){
 
+                // Om datan har något id tas det bort och sen sparas det i databasen.
                 data.forEach(function (element) {
 
                     if(element._id) {
@@ -438,6 +458,7 @@ function checkTopFive(hybridArray){
  *
  * @param data Array
  * @returns Array
+ * Sorterar data på score
  */
 function sortData(data){
 
@@ -451,6 +472,7 @@ function sortData(data){
  *
  * @param data
  * @returns Array
+ * Hämtar ut de 5 översta
  */
 function spliceData(data){
 
@@ -464,6 +486,7 @@ function spliceData(data){
  * @param data Array
  * @param tempArray Array
  * @returns Array
+ * Stoppar in all data från tempArray till data
  */
 function pushData(data, tempArray){
 
@@ -479,6 +502,7 @@ function pushData(data, tempArray){
  *
  * @param string string
  * @returns string
+ * Sätter no information om det inte finns någon
  */
 function checkValue(string){
 

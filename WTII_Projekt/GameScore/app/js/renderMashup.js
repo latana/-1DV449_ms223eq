@@ -24,6 +24,7 @@ if(navigator.onLine) {
 
         if (data !== null) {
 
+            // Om data är en sträng betyder det att servern inte hittat något
             if (typeof data === "string") {
 
                 message(data, resultDiv);
@@ -45,7 +46,7 @@ if(navigator.onLine) {
 /**
  *
  * @param data objekt
- * Renderar ut objektet
+ * Renderar ut objektet och stoppar in allting i result diven
  */
 function addResult(data){
 
@@ -120,7 +121,10 @@ function addResult(data){
  */
 function createTopFive() {
 
+    // Frågar servern om data
     socket.emit("top-Five");
+
+    // Här får jag svar från servern
     socket.on('top-Five', function (data) {
 
         if(data.length !== 0){
@@ -143,10 +147,12 @@ function createTopFive() {
             table.appendChild(tr);
             top5Div.appendChild(table);
 
+            // Sorterar listan på score
             data.sort(function(obj1, obj2) {
                 return obj2['score'] - obj1['score'];
             });
 
+            // Renderar ut listna i en table
             for(var i = 0; i < data.length; i++){
 
                 var div = document.createElement('tr');
@@ -163,7 +169,7 @@ function createTopFive() {
 }
 
 /**
- * Skickar det användaren matat in till serversidan.
+ * Väntar på att någon ska göra en sökning
  */
 window.onload = function () {
 
@@ -171,6 +177,11 @@ window.onload = function () {
     document.getElementById("form").onsubmit = search;
 };
 
+/**
+ * Skickar det användaren matat in till serversidan.
+ * Om systemet är offline frågar systemet efter localstore.
+ * @param e domObject
+ */
 function search(e) {
     e.preventDefault();
 
@@ -180,25 +191,33 @@ function search(e) {
 
         var resultDiv = document.getElementById('result');
 
+        // Tömmer resultatet
         deleteDiv();
 
+        // Renderar ut felmeddelande
         var domMessage = document.createElement('p');
         domMessage.setAttribute("class", "text-danger");
         domMessage.textContent = "The field is empty";
         resultDiv.appendChild(domMessage);
     }
     else{
+        // Visar laddningsgif
         createLoadingGif();
 
+        // Om man ä online
         if(navigator.onLine){
 
             offline = false;
+
+            // Tar bort offline mode texten
             online();
             socket.emit("search", {search: searchValue});
         }
         else {
 
+            // tömmer resultatet
             deleteDiv();
+            // Gör användaren medveten om att denne är offline
             offlineNotify();
 
             var storage = localStorage.getItem("localList");
@@ -208,6 +227,7 @@ function search(e) {
                 storage = JSON.parse(storage);
                 var count = 0;
 
+                // Letar upp ett spel i localstore och renderar ut om systemet hittar något
                 for(var i = 0; i < storage.length; i++) {
 
                     count ++;
@@ -226,6 +246,7 @@ function search(e) {
                 deleteGif();
             }
             else{
+                // Om det inte finns någon data i localStore.
                 var offlinediv = document.getElementById("result");
                 var offlineMessage = "There is no data in offline mode";
                 message(offlineMessage, offlinediv);
@@ -280,6 +301,7 @@ function titleHandler(string){
  *
  * @param data string
  * @param resultDiv domObject
+ * Renderar ut ett meddelande
  */
 function message(data, resultDiv){
 
@@ -317,7 +339,8 @@ function storeLocal(){
 }
 
 /**
- * Ser till att skriva ut offline mode om man inte är offline
+ * Ser till att skriva ut offline mode om man är offline
+ * och om den inte redan är utskriven.
  */
 function offlineNotify(){
 
@@ -347,7 +370,7 @@ function online(){
 }
 
 /**
- * Tar bort laddnings giffen.
+ * Tar bort laddnings giffen och texten.
  */
 function deleteGif(){
 
@@ -360,4 +383,5 @@ function deleteGif(){
     onlyOneGif = false;
 }
 
+// Gör användaren medveten om att denne är offline
 offlineNotify();
