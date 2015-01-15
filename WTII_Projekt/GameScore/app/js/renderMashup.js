@@ -211,7 +211,7 @@ function search(e) {
                 for(var i = 0; i < storage.length; i++) {
 
                     count ++;
-                    if (storage[i].title == searchValue.toLowerCase) {
+                    if (storage[i].title == searchValue.toLowerCase()) {
 
                         createLoadingGif();
                         addResult(storage[i]);
