@@ -3,7 +3,7 @@
  */
 
 if(navigator.onLine) {
-    var socket = io.connect('hemlig socketanslutning');
+    var socket = io.connect('Hemlig socketanslutning');
     storeLocal();
     createTopFive();
 }
@@ -211,7 +211,7 @@ function search(e) {
                 for(var i = 0; i < storage.length; i++) {
 
                     count ++;
-                    if (storage[i].title === searchValue) {
+                    if (storage[i].title == searchValue.toLowerCase) {
 
                         createLoadingGif();
                         addResult(storage[i]);

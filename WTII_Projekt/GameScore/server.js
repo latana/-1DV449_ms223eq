@@ -13,7 +13,7 @@ var application_root = __dirname,
     app = express(),
     mongo = require('mongodb'),
     monk = require('monk'),
-    db = monk('hemlig databasanslutning'),
+    db = monk('Hemlig databasanslutning'),
     router = express.Router();
 
 var env = process.env.NODE_ENV || 'development';
@@ -45,6 +45,7 @@ var server = app.listen(port, ipaddr, function () {
 var io = require('socket.io').listen(server, {origins:'*:*'});
 
 // Namn på collection's
+
 var gameSearch = "gameSearch";
 var topFive = "topFive";
 
@@ -301,10 +302,8 @@ function mashup(ignArray, omdbArray, socketToSendTo) {
 
     month = lessThenTen(month);
     day = lessThenTen(day);
-    hour = lessThenTen(hour);
-    min = lessThenTen(min);
 
-    var lastUpdate = year +"-"+ month + "-" + day + " " + hour + ":" + min;
+    var lastUpdate = year +"-"+ month + "-" + day;
 
     ignArray.forEach(function(ignObject){
         omdbArray.every(function (omdbObject) {
